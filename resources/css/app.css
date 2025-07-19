@@ -1,0 +1,39 @@
+@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+.layout {
+    background-color: #f8f9fa;
+    min-height: 86vh;
+}
+/* night mode */
+[data-bs-theme=dark] .layout {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.hero {
+    background-color: #e6e6e6;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.course-card img {
+    height: 180px;
+    object-fit: cover;
+}
+
+footer {
+    padding: 30px 0;
+}
+
+.bg-brand {
+    background-color: #0a79e7 !important;
+    color: #fff !important;
+}
+[data-bs-theme=dark] .bg-brand {
+    background-color: #043c74 !important;
+    color: #fff !important;
+}
