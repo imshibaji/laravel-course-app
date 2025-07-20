@@ -2,7 +2,7 @@ import AdminLayout from "@/layouts/AdminLayout";
 import Card from "../components/Card";
 import { Link } from "@inertiajs/react";
 
-export default function ChaptersList({ chapters }: any) {
+export default function ChaptersTrashed({ chapters }: any) {
     return (
         <AdminLayout>
             <div className="container py-3">

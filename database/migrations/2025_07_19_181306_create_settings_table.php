@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('key');
             $table->string('value');
-            $table->string('type');
-            $table->string('description');
-            $table->integer('order');
-            $table->boolean('active');
+            $table->string('type')->default('text');
+            $table->string('description')->nullable();
+            $table->integer('order')->default(0);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

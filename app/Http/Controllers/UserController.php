@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function dashboard()
     {
-        return inertia('users/dashboard');
+        $courses = Course::where('status', 'published')->get();
+        return inertia('users/dashboard', ['courses' => $courses]);
     }
 
     public function profile()
     {
-        return inertia('users/profile');
+        $user = auth()->user();
+        return inertia('users/profile', ['user' => $user]);
     }
 
-    public function course($id = null)
+    public function course($id)
     {
-        return inertia('users/course', ['id' => $id]);
+        $course = Course::find($id);
+        $chapters = $course->chapters;
+        return inertia('users/course', [
+            'chapters' => $chapters,
+        ]);
     }
     public function live()
     {

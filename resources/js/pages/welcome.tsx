@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import Review from "@/components/Review";
 import FrontLayout from "@/layouts/FrontLayout";
 
-export default function Home() {
+export default function Home({ courses }: any) {
     return (
         <FrontLayout>
             <section>
@@ -14,9 +14,32 @@ export default function Home() {
                 <div className="container">
                     <h2 className="text-center mb-4">Popular Courses</h2>
                     <div className="row g-4">
+                        {courses.map((course: any) => (
+                            <CourseCard
+                                key={course.id}
+                                title={course.title}
+                                desc={course.description.substring(0, 100)}
+                                image={course.image}
+                                certificate={course.certificate}
+                                duration={course.duration}
+                                instructor={course.instructor}
+                                actualPrice={course.offer_price > 0 ? course.price : 0}
+                                price={course.offer_price > 0 ? course.offer_price : course.price}
+                                category={course.category}
+                                language={course.language}
+                                level={course.level}
+                                status={course.status}
+                                tags={course.tags}
+                                enrollments={course.enrollments}
+                                rating={course.rating}
+                                course={course}
+                                handleEnroll={route('checkout', { course: course.id })}
+                                // learnMore={route('user.course', { id: course.id })}
+                            />
+                        ))}
+                        {/* <CourseCard actualPrice="1500" price="Free" />
                         <CourseCard actualPrice="1500" price="Free" />
-                        <CourseCard actualPrice="1500" price="Free" />
-                        <CourseCard actualPrice="1500" price="Free" />
+                        <CourseCard actualPrice="1500" price="Free" /> */}
                     </div>
                 </div>
             </section>

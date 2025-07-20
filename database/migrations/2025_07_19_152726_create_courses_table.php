@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->nullable();
-            $table->text('description')->nullable();
+            $table->string('description')->nullable();
+            $table->text('details')->nullable();
             $table->string('duration')->nullable();
             $table->string('instructor')->nullable();
             $table->double('price')->default(0);
@@ -26,8 +27,12 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('certificate')->nullable();
             $table->string('tags')->nullable();
+            $table->string('rating')->nullable();
+            $table->string('enrollments')->nullable();
             $table->string('status')->nullable();
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

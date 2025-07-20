@@ -148,9 +148,25 @@ export default function CourseEdit({ course }: any) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="input-group mb-3">
-                                    <label htmlFor="tags" className="input-group-text">Tags</label>
-                                    <input value={data.tags} onChange={(e) => setData('tags', e.target.value)} type="text" className="form-control" id="tags" name="tags" />
+                                <div className="row">
+                                    <div className="col-md-6 mb-3">
+                                        <div className="input-group">
+                                            <label htmlFor="tags" className="input-group-text">Tags</label>
+                                            <input value={data.tags} onChange={(e) => setData('tags', e.target.value)} type="text" className="form-control" id="tags" name="tags" />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-3 mb-3">
+                                        <div className="input-group">
+                                            <label htmlFor="enrollments" className="input-group-text">Enrollments</label>
+                                            <input value={data.enrollments} onChange={(e) => setData('enrollments', e.target.value)} type="text" className="form-control" id="enrollments" name="enrollments" />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-3 mb-3">
+                                        <div className="input-group">
+                                            <label htmlFor="rating" className="input-group-text">Rating</label>
+                                            <input value={data.rating} onChange={(e) => setData('rating', e.target.value)} type="text" className="form-control" id="rating" name="rating" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 import { Link } from "@inertiajs/react";
 
 
-export default function CourseCard({title, desc, duration, level, instructor, rating, actualPrice, price, image, enrollments, last_updated, handleEnroll, learnMore}: any) {
+export default function CourseCard({ title, desc, duration, level, instructor, rating, actualPrice, price, image, enrollments, last_updated, handleEnroll, learnMore }: any) {
     // Default values for the course card
     return (
         <div className="col-md-4">
@@ -30,7 +30,7 @@ export default function CourseCard({title, desc, duration, level, instructor, ra
                             <span className="text-muted">Instructor: {instructor || "Shibaji Debnath"}</span>
                         </div>
                         <div className="text-muted">
-                            <span className="text-muted">Rating: {rating || "4.5"}/5</span>
+                            <span className="text-muted">Rating: {rating || "4.5/5"}</span>
                         </div>
                     </div>
                     {/* Price and Enroll Now button */}
@@ -44,13 +44,20 @@ export default function CourseCard({title, desc, duration, level, instructor, ra
                                             <span className="col text-danger text-decoration-line-through text-xs"> ₹{actualPrice}/-</span>
                                         }
                                         <span className="col text-success">
-                                            {(price=== 0 || price.toString().toLowerCase() === "free" || price === "" || price === null || price === undefined )? "Free" : "₹" + price +"/-" }
+                                            {(price === 0 || price.toString().toLowerCase() === "free" || price === "" || price === null || price === undefined) ? "Free" : "₹" + price + "/-"}
                                         </span>
                                     </div>
                                 </div>
-                                <button onClick={handleEnroll} className="btn btn-outline-primary">
-                                    Enroll Now
-                                </button>
+                                {handleEnroll instanceof Function ? (
+                                    <button onClick={handleEnroll} className="btn btn-outline-primary">
+                                        Enroll Now
+                                    </button>) :
+                                    (
+                                        <Link href={handleEnroll} className="btn btn-outline-primary">
+                                            Enroll Now
+                                        </Link>
+                                    )
+                                }
                             </div>
                         )
                     }

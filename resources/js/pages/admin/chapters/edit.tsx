@@ -3,29 +3,18 @@ import Card from "../components/Card";
 import { Link, useForm } from "@inertiajs/react";
 import VideoPlayer from "@/components/VideoPlayer";
 
-export default function ChapterCreate({courseId}: {courseId: number}) {
-    const { data, setData, errors, processing, submit } = useForm({
-        video_type: 'youtube',
-        video_url: '',
-        embed_code: '',
-        title: '',
-        details: '',
-        duration: '',
-        instructor: '',
-        status: 'active',
-        course_id: courseId,
-    });
+export default function ChapterEdit({ chapter }: any) {
+    const { data, setData, errors, processing, submit } = useForm(chapter);
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        submit('post', route('admin.chapters.store'));
+        submit('put', route('admin.chapters.update', chapter.id));
     }
 
     return (
         <AdminLayout>
             <div className="container py-3">
-                <Card title="Chapter Creation" actions={
-                    <Link href={route('admin.courses.show', courseId)} className="btn btn-primary">Back to List</Link>
+                <Card title="Chapter Update" actions={
+                    <Link href={route('admin.courses.show', chapter.course_id)} className="btn btn-primary">Back to List</Link>
                 }>
                     {
                         errors && Object.keys(errors).length > 0 && (
@@ -53,8 +42,8 @@ export default function ChapterCreate({courseId}: {courseId: number}) {
                                             </select>
                                         </div>
                                         <div className="col-8 mt-3">
-                                            <label htmlFor="video_url" className="form-label">Video URL</label>
-                                            <input value={data.video_url} onChange={(e) => setData('video_url', e.target.value)} type="text" className="form-control" id="video" name="video" />
+                                            <label htmlFor="video_url" className="form-label">Video</label>
+                                            <input value={data.video_url} onChange={(e) => setData('video_url', e.target.value)} type="text" className="form-control" id="video_url" name="video_url" />
                                         </div>
                                     </div>
                                     <div className="mt-3">

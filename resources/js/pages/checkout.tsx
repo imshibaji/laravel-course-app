@@ -1,6 +1,19 @@
 import FrontLayout from "@/layouts/FrontLayout";
+import { useForm } from "@inertiajs/react";
 
-export default function Checkout() {
+export default function Checkout({user, course}: any) {
+    const {data, setData, submit, processing, errors, reset} = useForm({
+        first_name: user && user.firstname || '',
+        last_name: user && user.lastname || '',
+        email: user && user.email || '',
+        mobile: user && user.mobile || '',
+        product: course.title || '',
+        amount: course.offer_price || course.price || 0,
+    });
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        submit('post', route('payNow'));
+    }
     return (
         <FrontLayout>
             <div className="container py-5">
@@ -9,50 +22,35 @@ export default function Checkout() {
                         <div className="card p-4">
                             <h1 className="text-center mb-4">Checkout</h1>
                             <hr className="my-4" />
-                            <form className="row g-5 p-5">
+                            {errors && Object.keys(errors).length > 0 && (
+                                <div className="alert alert-danger">
+                                    <ul className="mb-0">
+                                        {Object.entries(errors).map(([key, value]) => (
+                                            <li key={key}>{value}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                            <form onSubmit={submitHandler} className="row g-5 p-5">
                                 <div className="col-md-6 m-0">
                                     <h2>Personal Information</h2>
                                     <div className="row g-3">
                                         <div className="col mb-3">
-                                            <label htmlFor="first-name" className="form-label">
-                                                First Name
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="first-name"
-                                                placeholder="Enter your name" />
+                                            <label htmlFor="first-name" className="form-label">First Name</label>
+                                            <input name="first_name" value={data.first_name} onChange={(e) => setData('first_name', e.target.value)} type="text" className="form-control" id="first-name" placeholder="Enter your name" />
                                         </div>
                                         <div className="col mb-3">
-                                            <label htmlFor="last-name" className="form-label">
-                                                Last Name
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="last-name"
-                                                placeholder="Enter your name" />
+                                            <label htmlFor="last-name" className="form-label">Last Name</label>
+                                            <input name="last_name" value={data.last_name} onChange={(e) => setData('last_name', e.target.value)} type="text" className="form-control" id="last-name" placeholder="Enter your name" />
                                         </div>
                                     </div>
                                     <div className="mb-3">
-                                        <label htmlFor="email" className="form-label">
-                                            Email
-                                        </label>
-                                        <input
-                                            type="email"
-                                            className="form-control"
-                                            id="email"
-                                            placeholder="Enter your email" />
+                                        <label htmlFor="email" className="form-label">Email</label>
+                                        <input name="email" value={data.email} onChange={(e) => setData('email', e.target.value)} type="email" className="form-control" id="email" placeholder="Enter your email" />
                                     </div>
                                     <div className="mb-3">
-                                        <label htmlFor="mobile" className="form-label">
-                                            Mobile
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="mobile"
-                                            placeholder="Enter your mobile number" />
+                                        <label htmlFor="mobile" className="form-label">Mobile</label>
+                                        <input name="mobile" value={data.mobile} onChange={(e) => setData('mobile', e.target.value)} type="text" className="form-control" id="mobile" placeholder="Enter your mobile number" />
                                     </div>
                                 </div>
                                 <hr className="my-4 d-md-none" />
@@ -60,30 +58,22 @@ export default function Checkout() {
                                     <div className="mb-3">
                                         <h2>Payment Information</h2>
                                         <div className="mb-3"></div>
-                                        <label htmlFor="product" className="form-label">
-                                            Product
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="product"
-                                            placeholder="Enter product name" />
-
+                                        <label htmlFor="product" className="form-label">Product</label>
+                                        <input readOnly name="product" value={data.product} onChange={(e) => setData('product', e.target.value)} type="text" className="form-control" id="product" placeholder="Enter product name" />
                                     </div>
                                     <div className="mb-3">
-                                        <label htmlFor="amount" className="form-label">
-                                            Amount
-                                        </label>
-                                        <input
-                                            type="number"
-                                            className="form-control"
-                                            id="amount"
-                                            placeholder="Enter amount" />
+                                        <label htmlFor="amount" className="form-label">Amount</label>
+                                        <input readOnly name="amount" value={data.amount} onChange={(e) => setData('amount', e.target.value)} type="number" className="form-control" id="amount" placeholder="Enter amount" />
                                     </div>
                                 </div>
-                                <button type="submit" className="btn btn-primary">
-                                    Complete Checkout
-                                </button>
+                                <div className="btn-group">
+                                    <button type="submit" className="btn btn-primary">
+                                        {processing ? 'Processing...' : 'Pay Now'}
+                                    </button>
+                                    <button type="button" className="btn btn-secondary">
+                                        Reset
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>

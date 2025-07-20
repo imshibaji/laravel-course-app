@@ -2,11 +2,11 @@ import FrontLayout from "@/layouts/FrontLayout";
 import CourseCard from "../components/CourseCard";
 import Hero from "../components/Hero";
 
-export default function Courses() {
+export default function Courses({ courses }: any) {
   return (
     <FrontLayout>
       <section>
-        <Hero 
+        <Hero
           title="Explore Our Courses"
           subtitle="Find the right course to enhance your skills and knowledge."
         />
@@ -17,13 +17,37 @@ export default function Courses() {
           <h2 className="text-center mb-4">All Available Courses</h2>
           <hr className="my-4" />
           <div className="row g-4">
+            {
+              courses.map((course: any) => (
+                <CourseCard
+                  key={course.id}
+                  title={course.title}
+                  desc={course.description.substring(0, 100)}
+                  image={course.image}
+                  certificate={course.certificate}
+                  duration={course.duration}
+                  instructor={course.instructor}
+                  actualPrice={course.offer_price > 0 ? course.price : 0}
+                  price={course.offer_price > 0 ? course.offer_price : course.price}
+                  category={course.category}
+                  language={course.language}
+                  level={course.level}
+                  status={course.status}
+                  tags={course.tags}
+                  enrollments={course.enrollments}
+                  rating={course.rating}
+                  course={course}
+                  handleEnroll={route('checkout', { course: course.id })}
+                // learnMore={route('user.course', { id: course.id })}
+                />))
+            }
+            {/* <CourseCard />
             <CourseCard />
             <CourseCard />
             <CourseCard />
             <CourseCard />
             <CourseCard />
-            <CourseCard />
-            <CourseCard />
+            <CourseCard /> */}
           </div>
         </div>
       </section>

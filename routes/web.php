@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ChapterController;
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\UserController;
@@ -9,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/courses', [FrontController::class, 'courses'])->name('home');
 Route::get('/checkout', [FrontController::class, 'checkout'])->name('checkout');
+Route::post('/payNow', [FrontController::class, 'payNow'])->name('payNow');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -30,8 +33,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
 
     Route::prefix('admin')->group(function () {
-        Route::resource('courses', App\Http\Controllers\Admin\CourseController::class)->names('admin.courses');
-        Route::resource('chapters', App\Http\Controllers\Admin\ChapterController::class)->names('admin.chapters');
+        Route::get('courses/search', [CourseController::class, 'search'])->name('admin.courses.search');
+        Route::get('courses/trashed', [CourseController::class, 'trashed'])->name('admin.courses.trashed');
+        Route::get('courses/restore/{id}', [CourseController::class, 'restore'])->name('admin.courses.restore');
+        Route::delete('courses/delete/{id}', [CourseController::class, 'forceDelete'])->name('admin.courses.forceDelete');
+        Route::resource('courses', CourseController::class)->names('admin.courses');
+
+        Route::get('chapters/search', [ChapterController::class, 'search'])->name('admin.chapters.search');
+        Route::get('chapters/trashed', [ChapterController::class, 'trashed'])->name('admin.chapters.trashed');
+        Route::get('chapters/restore/{id}', [ChapterController::class, 'restore'])->name('admin.chapters.restore');
+        Route::delete('chapters/delete/{id}', [ChapterController::class, 'forceDelete'])->name('admin.chapters.forceDelete');
+        Route::resource('chapters', ChapterController::class)->names('admin.chapters');
     });
 
     // User routes

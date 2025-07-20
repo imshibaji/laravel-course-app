@@ -25,7 +25,7 @@ export default function Nav() {
                         ) : (
                             <>
                                 <Link href={route('login')} className="btn btn-outline-light" type="button">Login</Link>
-                                <Link href={route('register')} className="btn btn-outline-light" type="button">Register</Link>
+                                {/* <Link href={route('register')} className="btn btn-outline-light" type="button">Register</Link> */}
                             </>
                         )}
                     </div>

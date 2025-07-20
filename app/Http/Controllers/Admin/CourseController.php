@@ -65,6 +65,8 @@ class CourseController extends Controller
         $course->duration = $request->input('duration');
         $course->instructor = $request->input('instructor');
         $course->tags = $request->input('tags');
+        $course->rating = $request->input('rating');
+        $course->enrollments = $request->input('enrollments');
         $course->status = $request->input('status');
         $course = $this->uploadImage($request, $course);
         $course->save();
@@ -77,7 +79,12 @@ class CourseController extends Controller
     public function show(string $id)
     {
         $course = Course::find($id);
-        return inertia('admin/courses/show', ['course' => $course]);
+        $chapters = $course->chapters;
+        // dd($course, $chapters);
+        return inertia('admin/courses/show', [
+            'course' => $course,
+            'chapters' => $chapters
+        ]);
     }
 
     /**
@@ -108,6 +115,8 @@ class CourseController extends Controller
         $course->duration = $request->input('duration') ?? $course->duration;
         $course->instructor = $request->input('instructor') ?? $course->instructor;
         $course->tags = $request->input('tags') ?? $course->tags;
+        $course->rating = $request->input('rating') ?? $course->rating;
+        $course->enrollments = $request->input('enrollments') ?? $course->enrollments;
         $course->status = $request->input('status') ?? $course->status;
         $course = $this->uploadImage($request, $course);
         $course->save();
@@ -120,8 +129,51 @@ class CourseController extends Controller
      */
     public function destroy(string $id)
     {
+        // Delete course image and certificate
         $course = Course::find($id);
+
+        // Delete chapters
+        $chapters = $course->chapters;
+        foreach($chapters as $chapter){
+            $chapter->delete();
+        }
+        // Delete course
         $course->delete();
         return to_route('admin.courses.index');
+    }
+
+    public function search(Request $request){
+        $search = $request->input('search');
+        $courses = Course::where('title', 'like', '%' . $search . '%')->get();
+        return inertia('admin/courses/index', ['courses' => $courses]);
+    }
+
+    public function trashed(){
+        $courses = Course::onlyTrashed()->get();
+        return inertia('admin/courses/trashed', ['courses' => $courses]);
+    }
+
+    public function restore($id){
+        $course = Course::onlyTrashed()->find($id);
+        $course->restore();
+        return to_route('admin.courses.trashed');
+    }
+
+    public function forceDelete($id){
+        $course = Course::onlyTrashed()->find($id);
+        if($course->image){
+            unlink(public_path('images/courses/' . $course->image));
+        }
+        if($course->certificate){
+            unlink(public_path('images/certificates/' . $course->certificate));
+        }
+        // Delete chapters
+        $chapters = $course->chapters;
+        foreach($chapters as $chapter){
+            $chapter->forceDelete();
+        }
+        // Delete course
+        $course->forceDelete();
+        return to_route('admin.courses.trashed');
     }
 }

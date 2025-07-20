@@ -1,12 +1,15 @@
-export default function CourseCard() {
+import AppMarkdown from "@/components/AppMarkdown";
+import VideoPlayer from "@/components/VideoPlayer";
+
+export default function CourseCard({chapter}: any) {
     return (
         <div className="card">
             <div className="card-header">
-                <h5 className="card-title">Course Title</h5>
+                <h5 className="card-title">{chapter.title}</h5>
             </div>
             <div className="card-body">
-                <h1>Course Details</h1>
-                <p>Here you can view the details of a specific course.</p>
+                <VideoPlayer src={chapter.video_url} />
+                <AppMarkdown content={chapter.details} />
                 {/* Additional course content can be added here */}
             </div>
             <div className="card-footer d-flex justify-content-between p-3">

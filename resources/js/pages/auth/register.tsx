@@ -30,7 +30,7 @@ export default function Signup() {
     };
     return (
         <FrontLayout>
-        <div className="py-5" style={{ backgroundColor: "#e6e6e6", minHeight: "100vh" }}>
+        <div className="py-5">
             <div className="container py-2">
                 <div className="row justify-content-center">
                 <div className="col-md-6">

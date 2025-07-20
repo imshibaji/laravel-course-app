@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
-        return inertia('admin/dashboard');
+        $courses = Course::all();
+        return inertia('admin/dashboard', ['courses' => $courses]);
     }
 
     public function profile()
     {
-        return inertia('admin/profile');
+        $user = auth()->user();
+        return inertia('admin/profile', ['user' => $user]);
     }
 
-    public function course($id = null)
+    public function course($id)
     {
-        return inertia('admin/course', ['id' => $id]);
+        $course = Course::find($id);
+        $chapters = $course->chapters;
+        return inertia('admin/course', [
+            'chapters' => $chapters,
+        ]);
     }
     public function live()
     {

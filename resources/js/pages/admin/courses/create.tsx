@@ -17,6 +17,8 @@ export default function CourseCreate() {
         level: '',
         status: '',
         tags: '',
+        enrollments: '',
+        rating: '',
     });
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -111,7 +113,7 @@ export default function CourseCreate() {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="description" className="form-label">Description</label>
-                                    <textarea value={data.description} onChange={(e) => setData('description', e.target.value)} className="form-control" id="description" name="description" rows={23}></textarea>
+                                    <textarea value={data.description} onChange={(e) => setData('description', e.target.value)} className="form-control" id="description" name="description" rows={24}></textarea>
                                 </div>
                                 
                                 <div className="row">
@@ -146,9 +148,25 @@ export default function CourseCreate() {
                                         </select>
                                     </div>
                                 </div>
-                                <div className="mb-3">
-                                    <label htmlFor="tags" className="form-label">Tags</label>
-                                    <input value={data.tags} onChange={(e) => setData('tags', e.target.value)} type="text" className="form-control" id="tags" name="tags" />
+                                <div className="row">
+                                    <div className="col-md-6 mb-3">
+                                        <div className="input-group">
+                                            <label htmlFor="tags" className="input-group-text">Tags</label>
+                                            <input value={data.tags} onChange={(e) => setData('tags', e.target.value)} type="text" className="form-control" id="tags" name="tags" />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-3 mb-3">
+                                        <div className="input-group">
+                                            <label htmlFor="enrollments" className="input-group-text">Enrollments</label>
+                                            <input value={data.enrollments} onChange={(e) => setData('enrollments', e.target.value)} type="text" className="form-control" id="enrollments" name="enrollments" />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-3 mb-3">
+                                        <div className="input-group">
+                                            <label htmlFor="rating" className="input-group-text">Rating</label>
+                                            <input value={data.rating} onChange={(e) => setData('rating', e.target.value)} type="text" className="form-control" id="rating" name="rating" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

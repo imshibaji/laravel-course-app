@@ -2,15 +2,12 @@ import AdminLayout from "@/layouts/AdminLayout";
 import Card from "../components/Card";
 import { Link } from "@inertiajs/react";
 
-export default function CourseList({ courses }: any) {
+export default function CourseTrashed({ courses }: any) {
     return (
         <AdminLayout>
             <div className="container py-3">
                 <Card title="Courses" actions={
-                    <>
-                        <Link href={route('admin.courses.create')} className="btn btn-primary me-2">Add New Course</Link>
-                        <Link href={route('admin.courses.trashed')} className="btn btn-warning">Trashed Courses</Link>
-                    </>
+                    <Link href={route('admin.courses.index')} className="btn btn-primary">Back to List</Link>
                 }>
                     <div className="table-responsive">
                         <table className="table table-striped">
@@ -39,9 +36,8 @@ export default function CourseList({ courses }: any) {
                                             <td className="text-center">{course.status}</td>
                                             <td className="text-center">
                                                 <div className="btn-group" role="group">
-                                                    <Link href={route('admin.courses.show', course.id)} className="btn btn-info">View</Link>
-                                                    <Link href={route('admin.courses.edit', course.id)} className="btn btn-secondary">Edit</Link>
-                                                    <Link href={route('admin.courses.destroy', course.id)} method="delete" className="btn btn-danger">Delete</Link>
+                                                    <Link href={route('admin.courses.restore', course.id)} className="btn btn-secondary">Restore</Link>
+                                                    <Link href={route('admin.courses.forceDelete', course.id)} method="delete" className="btn btn-danger">Delete</Link>
                                                 </div>
                                             </td>
                                         </tr>
