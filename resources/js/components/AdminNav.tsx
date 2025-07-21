@@ -1,7 +1,7 @@
 import { SharedData } from "@/types";
 import { Link, usePage } from "@inertiajs/react";
 
-export default function AdminNav({user}: {user?: {fullname?: string}}) {
+export default function AdminNav() {
     const { auth } = usePage<SharedData>().props;
     const name = `${auth.user?.firstname}` || "Guest";
     return (
