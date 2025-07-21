@@ -44,7 +44,7 @@ export default function Course({ chapters }: { chapters: ChapterProps[] }) {
         if (!chapter.title) {
             setChapter(chapters[0]);
         }
-    })
+    }, [chapter.title, chapters])
     const prevHandler = () => {
         chapters.forEach((chap: any, index: number) => {
             if (chap.id === chapter.id) {
