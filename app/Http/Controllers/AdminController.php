@@ -13,12 +13,6 @@ class AdminController extends Controller
         return inertia('admin/dashboard', ['courses' => $courses]);
     }
 
-    public function profile()
-    {
-        $user = auth()->user();
-        return inertia('admin/profile', ['user' => $user]);
-    }
-
     public function course($id)
     {
         $course = Course::find($id);

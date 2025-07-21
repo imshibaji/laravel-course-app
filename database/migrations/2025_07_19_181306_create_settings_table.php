@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('key');
-            $table->string('value');
-            $table->string('type')->default('text');
+            $table->text('value');
+            $table->string('type')->default('string');
             $table->string('description')->nullable();
-            $table->integer('order')->default(0);
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

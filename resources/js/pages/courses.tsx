@@ -23,8 +23,8 @@ export default function Courses({ courses }: any) {
                   key={course.id}
                   title={course.title}
                   desc={course.description.substring(0, 100)}
-                  image={course.image}
-                  certificate={course.certificate}
+                  image={course.image ? "/images/courses/" + course.image : "/images/image-placeholder.jpg"}
+                  certificate={course.certificate ? "/images/certificates/" + course.certificate : "/images/certificate.jpg"}
                   duration={course.duration}
                   instructor={course.instructor}
                   actualPrice={course.offer_price > 0 ? course.price : 0}
@@ -37,7 +37,9 @@ export default function Courses({ courses }: any) {
                   enrollments={course.enrollments}
                   rating={course.rating}
                   course={course}
-                  handleEnroll={route('checkout', { course: course.id })}
+                  enrollBtnText={course.status === "published" ? "Enroll Now" : "Coming Soon"}
+                  handleEnroll={course.status === "published" ? route('checkout', { course: course.id }) : null}
+                  lastUpdated={course.updated_at}
                 // learnMore={route('user.course', { id: course.id })}
                 />))
             }

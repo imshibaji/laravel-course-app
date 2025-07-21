@@ -30,10 +30,10 @@ export default function CourseList({ courses }: any) {
                                     courses.map((course: any) => (
                                         <tr key={course.id}>
                                             <td className="text-center">
-                                                <img src={course.image? "/images/courses/" + course.image : 'https://shibajidebnath.com/wp-content/uploads/2024/04/Web-design.webp'} alt="Course Image" className="img-fluid rounded" style={{ width: '50px' }} />
+                                                <img src={course.image? "/images/courses/" + course.image : '/images/image-placeholder.jpg'} alt="Course Image" className="img-fluid rounded" style={{ width: '50px' }} />
                                             </td>
                                             <td>{course.title}</td>
-                                            <td>{course.description}</td>
+                                            <td>{course.description.substring(0, 50)}...</td>
                                             <td className="text-center">{course.language}</td>
                                             <td className="text-center">{course.level}</td>
                                             <td className="text-center">{course.status}</td>

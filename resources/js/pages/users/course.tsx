@@ -79,9 +79,8 @@ export default function Course({ chapters }: { chapters: ChapterProps[] }) {
                                 <h5 className="card-title">{chapter.title || "Course Title"}</h5>
                             </div>
                             <div className="card-body">
-                                <div className="ratio ratio-16x9">
-                                    <VideoPlayer src={chapter.video_url || ""} />
-                                </div>
+                                {chapter.embed_code && <div dangerouslySetInnerHTML={{ __html: chapter.embed_code }} />}
+                                {chapter.video_url && <div className="ratio ratio-16x9"><VideoPlayer src={chapter.video_url} /></div>}
                                 <div className="mt-3">
                                     <AppMarkdown content={chapter.details} />
                                 </div>
@@ -90,7 +89,7 @@ export default function Course({ chapters }: { chapters: ChapterProps[] }) {
                                 <button onClick={prevHandler} className="btn btn-outline-secondary">
                                     <i className="bi bi-arrow-left-short"></i> Previous
                                 </button>
-                                <button className="btn btn-outline-primary">
+                                <button onClick={markAsCompletedHandler} className="btn btn-outline-primary">
                                     <i className="bi bi-check-circle"></i> Mark as Completed
                                 </button>
                                 <button onClick={nextHandler} className="btn btn-outline-secondary">

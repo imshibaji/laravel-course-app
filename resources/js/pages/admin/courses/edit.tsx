@@ -37,14 +37,14 @@ export default function CourseEdit({ course }: any) {
                             <div className="col-md-3 order-2 order-md-1">
                                 <div className="row">
                                     <div className="col-6 col-md-12 mt-3">
-                                        <img src={course.image ? "/images/courses/" + course.image : data.image ? URL.createObjectURL(data.image) : 'https://shibajidebnath.com/wp-content/uploads/2024/04/Web-design.webp'} alt="Course Image" className="img-fluid rounded" />
+                                        <img src={course.image ? "/images/courses/" + course.image : data.image ? URL.createObjectURL(data.image) : '/images/image-placeholder.jpg'} alt="Course Image" className="img-fluid rounded" />
                                         <div className="mt-3">
                                             <label htmlFor="title" className="form-label">Image</label>
                                             <input onChange={(e) => setData('image', e.target.files?.[0])} type="file" className="form-control" id="image" name="image" />
                                         </div>
                                     </div>
                                     <div className="col-6 col-md-12 mt-3">
-                                        <img src={course.certificate ? "/images/certificates/" + course.certificate : data.certificate ? URL.createObjectURL(data.certificate) : 'https://shibajidebnath.com/wp-content/uploads/2024/04/Web-design.webp'} alt="Course Certificate" className="img-fluid rounded" />
+                                        <img src={course.certificate ? "/images/certificates/" + course.certificate : data.certificate ? URL.createObjectURL(data.certificate) : '/images/certificate.jpg'} alt="Course Certificate" className="img-fluid rounded" />
                                         <div className="mt-3">
                                             <label htmlFor="certificate" className="form-label">Certificate</label>
                                             <input onChange={(e) => setData('certificate', e.target.files?.[0])} type="file" className="form-control" id="certificate" name="certificate" />

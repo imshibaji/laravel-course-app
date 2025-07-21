@@ -13,10 +13,10 @@ class UserController extends Controller
         return inertia('users/dashboard', ['courses' => $courses]);
     }
 
-    public function profile()
+    public function courses()
     {
-        $user = auth()->user();
-        return inertia('users/profile', ['user' => $user]);
+        $courses = Course::where('status', 'published')->get();
+        return inertia('users/courses', ['courses' => $courses]);
     }
 
     public function course($id)

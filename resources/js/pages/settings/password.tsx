@@ -48,6 +48,16 @@ export default function Password() {
                 <div>
                     <h1>Password</h1>
                     <p>Update your password here.</p>
+                    {recentlySuccessful && <div className="alert alert-success">Password updated successfully.</div>}
+                    {errors && Object.keys(errors).length > 0 && (
+                        <div className="alert alert-danger">
+                            <ul className="mb-0">
+                                {Object.entries(errors).map(([key, value]) => (
+                                    <li key={key}>{value}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                     <form onSubmit={updatePassword}>
                         <div className="form-group mb-3">
                             <label htmlFor="current_password">Current Password</label>

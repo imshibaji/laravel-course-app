@@ -20,7 +20,10 @@ export default function AdminNav({user}: {user?: {fullname?: string}}) {
                             <Link className="nav-link active" aria-current="page" href={route('admin.courses.index')}>Courses</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href={route('admin.live')}>Live Chat</Link>
+                            <Link className="nav-link active" aria-current="page" href={route('admin.users.index')}>All Users</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" href={route('admin.settings.index')}>Website Settings</Link>
                         </li>
                     </ul>
                     <div className="ms-auto d-flex gap-2">

@@ -31,7 +31,7 @@ export default function CourseShow({ course, chapters }: any) {
                                 </div>
                                 <div className="card-body">
                                     {chapter && <VideoPlayer src={chapter ? chapter.video_url : "https://www.youtube.com/watch?v=lPhDaw3Aiig"} />}
-                                    {!chapter && <div className="ratio ratio-16x9"><img className="img-fluid" src={course.image ? "/images/courses/" + course.image : "https://shibajidebnath.com/wp-content/uploads/2024/04/Web-design.webp"} alt={course.title} /></div>}
+                                    {!chapter && <div className="ratio ratio-16x9"><img className="img-fluid" src={course.image ? "/images/courses/" + course.image : "/images/image-placeholder.jpg"} alt={course.title} /></div>}
                                 </div>
                                 <div className="card-body">
                                     <div className="accordion" id="courseAccordion">
@@ -57,10 +57,10 @@ export default function CourseShow({ course, chapters }: any) {
                                                 <div className="accordion-body">
                                                     <div className="row">
                                                         <div className="col-md-6">
-                                                            <img src={course.image ? "/images/courses/" + course.image : "https://shibajidebnath.com/wp-content/uploads/2024/04/Web-design.webp"} alt="Course Image" className="img-fluid" />
+                                                            <img src={course.image ? "/images/courses/" + course.image : "/images/image-placeholder.jpg"} alt="Course Image" className="img-fluid" />
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <img src={course.certificate ? "/images/certificates/" + course.certificate : "https://shibajidebnath.com/wp-content/uploads/2024/04/Web-design.webp"} alt="Course Image" className="img-fluid" />
+                                                            <img src={course.certificate ? "/images/certificates/" + course.certificate : "/images/certificate.jpg"} alt="Course Image" className="img-fluid" />
                                                         </div>
                                                     </div>
                                                 </div>

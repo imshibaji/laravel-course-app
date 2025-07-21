@@ -14,10 +14,10 @@ export default function UserNav() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href="/user">Dashboard</Link>
+                            <Link className="nav-link active" aria-current="page" href={route('user.dashboard')}>Dashboard</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href="/user/live">Live Session</Link>
+                            <Link className="nav-link active" aria-current="page" href={route('user.courses')}>My Courses</Link>
                         </li>
                     </ul>
                     <div className="ms-auto d-flex gap-2">

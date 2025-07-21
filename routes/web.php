@@ -1,12 +1,22 @@
 <?php
 
-use App\Http\Controllers\Admin\ChapterController;
-use App\Http\Controllers\Admin\CourseController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\InstallController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+//install route
+Route::get('/install', [InstallController::class, 'step1'])->name('install.step1');
+Route::post('/install/step1', [InstallController::class, 'postStep1'])->name('install.postStep1');
+Route::get('/install/step2', [InstallController::class, 'step2'])->name('install.step2');
+Route::post('/install/step2', [InstallController::class, 'postStep2'])->name('install.postStep2');
+Route::get('/install/step3', [InstallController::class, 'step3'])->name('install.step3');
+Route::post('/install/finish', [InstallController::class, 'finish'])->name('install.finish');
+Route::get('/install/step4', [InstallController::class, 'step4'])->name('install.step4');
+Route::post('/install/complete', [InstallController::class, 'complete'])->name('install.complete');
+
+
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/courses', [FrontController::class, 'courses'])->name('home');
@@ -22,41 +32,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         }
     })->name('dashboard');
 
-    // Admin routes
-    Route::get('/admin', function () {
-        return redirect()->route('admin.dashboard');
-    })->name('admin');
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/course', [AdminController::class, 'course'])->name('admin.course');
-    Route::get('/admin/course/{id}', [AdminController::class, 'course'])->name('admin.course');
-    Route::get('/admin/live', [AdminController::class, 'live'])->name('admin.live');
-    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
-
-    Route::prefix('admin')->group(function () {
-        Route::get('courses/search', [CourseController::class, 'search'])->name('admin.courses.search');
-        Route::get('courses/trashed', [CourseController::class, 'trashed'])->name('admin.courses.trashed');
-        Route::get('courses/restore/{id}', [CourseController::class, 'restore'])->name('admin.courses.restore');
-        Route::delete('courses/delete/{id}', [CourseController::class, 'forceDelete'])->name('admin.courses.forceDelete');
-        Route::resource('courses', CourseController::class)->names('admin.courses');
-
-        Route::get('chapters/search', [ChapterController::class, 'search'])->name('admin.chapters.search');
-        Route::get('chapters/trashed', [ChapterController::class, 'trashed'])->name('admin.chapters.trashed');
-        Route::get('chapters/restore/{id}', [ChapterController::class, 'restore'])->name('admin.chapters.restore');
-        Route::delete('chapters/delete/{id}', [ChapterController::class, 'forceDelete'])->name('admin.chapters.forceDelete');
-        Route::resource('chapters', ChapterController::class)->names('admin.chapters');
-    });
-
     // User routes
     Route::get('/user', function () {
         return redirect()->route('user.dashboard');
     })->name('user');
     Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
-    Route::get('/user/course', [UserController::class, 'course'])->name('user.course');
+    Route::get('/user/courses', [UserController::class, 'courses'])->name('user.courses');
     Route::get('/user/course/{id}', [UserController::class, 'course'])->name('user.course');
     Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::get('/user/live', [UserController::class, 'live'])->name('user.live');
 });
 
+require __DIR__.'/admin.php';
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
 require __DIR__.'/social.php';

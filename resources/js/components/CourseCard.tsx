@@ -1,16 +1,26 @@
 import { Link } from "@inertiajs/react";
 
 
-export default function CourseCard({ title, desc, duration, level, instructor, rating, actualPrice, price, image, enrollments, last_updated, handleEnroll, learnMore }: any) {
+export const formatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: '2-digit',
+//   hour: '2-digit',
+//   minute: '2-digit',
+//   second: '2-digit',
+//   timeZoneName: 'short',
+});
+
+export default function CourseCard({ title, desc, duration, level, instructor, rating, actualPrice, price, image, enrollments, lastUpdated, enrollBtnText, handleEnroll, learnMore }: any) {
     // Default values for the course card
     return (
         <div className="col-md-4">
             <div className="card course-card">
                 <img
-                    src={image || "https://shibajidebnath.com/wp-content/uploads/2024/04/Web-design.webp"}
+                    src={image || "/images/image-placeholder.jpg"}
                     className="card-img-top"
                     alt={title || "Web Development Bootcamp"}
-                    style={{ height: "200px", objectFit: "cover" }}
+                    style={{ height: "220px", objectFit: "cover" }}
                     loading="lazy"
                 />
                 <div className="card-header">
@@ -18,7 +28,7 @@ export default function CourseCard({ title, desc, duration, level, instructor, r
                 </div>
                 <div className="card-body">
                     <p className="card-text">
-                        {desc || "Learn the fundamentals of web development, including HTML, CSS, and JavaScript. Build responsive websites and web applications."}
+                        {desc.length > 90 ? desc.substring(0, 90) + "..." : desc || "Learn the fundamentals of web development, including HTML, CSS, and JavaScript. Build responsive websites and web applications."}
                     </p>
                     <hr className="my-3" />
                     <div className="d-flex justify-content-between align-items-center">
@@ -50,11 +60,11 @@ export default function CourseCard({ title, desc, duration, level, instructor, r
                                 </div>
                                 {handleEnroll instanceof Function ? (
                                     <button onClick={handleEnroll} className="btn btn-outline-primary">
-                                        Enroll Now
+                                        {enrollBtnText || "Enroll Now"}
                                     </button>) :
                                     (
                                         <Link href={handleEnroll} className="btn btn-outline-primary">
-                                            Enroll Now
+                                            {enrollBtnText || "Enroll Now"}
                                         </Link>
                                     )
                                 }
@@ -75,7 +85,7 @@ export default function CourseCard({ title, desc, duration, level, instructor, r
                 <div className="card-footer text-muted">
                     <div className="d-flex justify-content-between">
                         <small>Enrollments: {enrollments || "100+"}</small>
-                        <small>Last updated: {last_updated || "April 2025"}</small>
+                        <small>Last updated: {lastUpdated ? formatter.format(new Date(lastUpdated)) : "April 2025"}</small>
                     </div>
                 </div>
             </div>

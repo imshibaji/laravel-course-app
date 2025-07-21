@@ -9,12 +9,12 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $courses = Course::where('status', 'published')->get();
+        $courses = Course::all();
         return inertia('welcome', ['courses' => $courses]);
     }
     public function courses()
     {
-        $courses = Course::where('status', 'published')->get();
+        $courses = Course::all();
         return inertia('courses', ['courses' => $courses]);
     }
     public function checkout(Request $request)

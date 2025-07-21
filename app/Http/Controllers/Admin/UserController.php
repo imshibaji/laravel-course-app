@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -12,7 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return inertia('admin/users/index', ['users' => $users]);
     }
 
     /**
@@ -44,7 +46,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        return inertia('admin/users/edit', ['user' => $user]);
     }
 
     /**
@@ -52,7 +55,9 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+        $user->update($request->all());
+        return redirect()->route('admin.users.index');
     }
 
     /**

@@ -16,8 +16,8 @@ export default function Dashboard({ courses }: any) {
                                 key={course.id}
                                 title={course.title}
                                 desc={course.description.substring(0, 100)}
-                                image={course.image}
-                                certificate={course.certificate}
+                                image={course.image ? "/images/courses/" + course.image : "/images/image-placeholder.jpg"}
+                                certificate={course.certificate ? "/images/certificates/" + course.certificate : "/images/certificate.jpg"}
                                 duration={course.duration}
                                 instructor={course.instructor}
                                 // actualPrice={course.offer_price > 0 ? course.price : 0 }
