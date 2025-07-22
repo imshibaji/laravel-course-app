@@ -3,8 +3,8 @@ import { useForm } from "@inertiajs/react";
 
 export default function Checkout({user, course}: any) {
     const {data, setData, submit, processing, errors, reset} = useForm({
-        first_name: user && user.firstname || '',
-        last_name: user && user.lastname || '',
+        firstname: user && user.firstname || '',
+        lastname: user && user.lastname || '',
         email: user && user.email || '',
         mobile: user && user.mobile || '',
         product: course.title || '',
@@ -12,7 +12,7 @@ export default function Checkout({user, course}: any) {
     });
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        submit('post', route('payNow'));
+        submit('post', route('payu.pay'));
     }
     return (
         <FrontLayout>
@@ -37,11 +37,11 @@ export default function Checkout({user, course}: any) {
                                     <div className="row g-3">
                                         <div className="col mb-3">
                                             <label htmlFor="first-name" className="form-label">First Name</label>
-                                            <input name="first_name" value={data.first_name} onChange={(e) => setData('first_name', e.target.value)} type="text" className="form-control" id="first-name" placeholder="Enter your name" />
+                                            <input name="firstname" value={data.firstname} onChange={(e) => setData('firstname', e.target.value)} type="text" className="form-control" id="first-name" placeholder="Enter your name" />
                                         </div>
                                         <div className="col mb-3">
                                             <label htmlFor="last-name" className="form-label">Last Name</label>
-                                            <input name="last_name" value={data.last_name} onChange={(e) => setData('last_name', e.target.value)} type="text" className="form-control" id="last-name" placeholder="Enter your name" />
+                                            <input name="lastname" value={data.lastname} onChange={(e) => setData('lastname', e.target.value)} type="text" className="form-control" id="last-name" placeholder="Enter your name" />
                                         </div>
                                     </div>
                                     <div className="mb-3">

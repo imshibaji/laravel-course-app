@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\InstallController;
+use App\Http\Controllers\PayuController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,11 @@ Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/courses', [FrontController::class, 'courses'])->name('home');
 Route::get('/checkout', [FrontController::class, 'checkout'])->name('checkout');
 Route::post('/payNow', [FrontController::class, 'payNow'])->name('payNow');
+
+// Payu Payment Routes
+Route::get('/payu', [PayuController::class, 'showForm'])->name('payu.form');
+Route::post('/payu/pay', [PayuController::class, 'initiatePayment'])->name('payu.pay');
+Route::post('/payu/response', [PayuController::class, 'handleResponse'])->name('payu.response');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {

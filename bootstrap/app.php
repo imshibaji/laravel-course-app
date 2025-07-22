@@ -23,6 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
             AddLinkHeadersForPreloadedAssets::class,
         ]);
 
+        $middleware->validateCsrfTokens(except:[
+            'payu/response',
+            'payu/response/*',
+        ]);
+
         $middleware->alias([
             'admin' => CheckAdminMiddleware::class,
         ]);

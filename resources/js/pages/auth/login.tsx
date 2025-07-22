@@ -34,10 +34,10 @@ export default function Login() {
                 <div className="col-md-6">
                     <div className="card p-4">
                         <div className="card-body">
-                            <h3 className="card-title">Login</h3>
+                            {/* <h3 className="card-title">Login</h3>
                             <p className="text-muted">Welcome back! Please login to your account.</p>
                             <SocialBtn />
-                            <hr />
+                            <hr /> */}
                             <h3 className="text-center my-4">Login with Email</h3>
                             {errors && Object.keys(errors).length > 0 && (
                                 <div className="alert alert-danger">

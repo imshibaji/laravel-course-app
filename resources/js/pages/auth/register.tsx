@@ -12,12 +12,12 @@ type RegisterForm = {
     password_confirmation: string;
 };
 
-export default function Signup() {
+export default function Signup({paiddata}:any) {
      const { data, setData, post, processing, errors, reset } = useForm<Required<RegisterForm>>({
-        firstname: '',
-        lastname: '',
-        mobile: '',
-        email: '',
+        firstname: paiddata && paiddata.firstname || '',
+        lastname: paiddata && paiddata.lastname || '',
+        mobile: paiddata && paiddata.phone || '',
+        email: paiddata && paiddata.email || '',
         password: '',
         password_confirmation: '',
     });
@@ -36,10 +36,10 @@ export default function Signup() {
                 <div className="col-md-6">
                     <div className="card p-4">
                         <div className="card-body">
-                            <h1>Signup</h1>
+                            {/* <h1>Signup</h1>
                             <p className="text-muted">Create a new account</p>
                             <SocialBtn />
-                            <hr />
+                            <hr /> */}
                             <h3 className="card-title">Sign Up</h3>
                             {errors && Object.keys(errors).length > 0 && (
                                 <div className="alert alert-danger">
