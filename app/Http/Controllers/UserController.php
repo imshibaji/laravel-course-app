@@ -15,7 +15,7 @@ class UserController extends Controller
 
     public function courses()
     {
-        $courses = Course::where('status', 'published')->get();
+        $courses = Course::all();
         return inertia('users/courses', ['courses' => $courses]);
     }
 

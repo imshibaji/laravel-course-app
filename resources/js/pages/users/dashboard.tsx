@@ -8,7 +8,7 @@ export default function Dashboard({ courses }: any) {
         <UserLayout>
             <div className="container py-5">
                 <section className="pb-5">
-                    <h2 className="text-center my-4">Latest Learning Courses</h2>
+                    <h2 className="text-center my-4">Currently Available Courses</h2>
                     <hr className="my-4" />
                     <div className="row g-4">
                         {courses.map((course: any) => (
@@ -30,12 +30,10 @@ export default function Dashboard({ courses }: any) {
                                 enrollments={course.enrollments}
                                 rating={course.rating}
                                 course={course}
-                                learnMore={route('user.course', { id: course.id })}
+                                learnMoreLink={course.status === "published" ? route('user.course', { id: course.id }): '#'}
+                                learnMoreText={course.status === "published" ? "Learn More" : 'Coming Soon'} // Use a ternary operator to conditionally set the text
                             />
                         ))}
-                        {/* <MainCourseCard learnMore="/user/course?id=1&chapter=1" />
-                        <MainCourseCard learnMore="/user/course?id=1&chapter=2" />
-                        <MainCourseCard learnMore="/user/course?id=1&chapter=3" /> */}
                     </div>
                 </section>
             </div>

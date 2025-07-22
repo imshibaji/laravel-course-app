@@ -1,4 +1,4 @@
-import DeleteUser from "@/components/delete-user";
+import DeleteUser from "@/components/DeleteUser";
 import Sidebar from "@/components/Sidebar";
 import InnerPageLayout from "@/layouts/InnerPageLayout";
 import UserLayout from "@/layouts/UserLayout";

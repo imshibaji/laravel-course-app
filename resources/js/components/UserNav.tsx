@@ -2,7 +2,7 @@ import { SharedData } from "@/types";
 import { Link, usePage } from "@inertiajs/react";
 
 export default function UserNav() {
-    const { auth } = usePage<SharedData>().props;
+    const { auth, location: url } = usePage<SharedData>().props;
     const name = `${auth.user?.firstname}` || "Guest";
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-brand">
@@ -14,10 +14,10 @@ export default function UserNav() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href={route('user.dashboard')}>Dashboard</Link>
+                            <Link className={location.pathname === "/user/dashboard" ? "nav-link active" : "nav-link"}  aria-current="page" href={route('user.dashboard')}>Dashboard</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href={route('user.courses')}>My Courses</Link>
+                            <Link className={location.pathname === "/user/courses" ? "nav-link active" : "nav-link"} aria-current="page" href={route('user.courses')}>My All Courses</Link>
                         </li>
                     </ul>
                     <div className="ms-auto d-flex gap-2">

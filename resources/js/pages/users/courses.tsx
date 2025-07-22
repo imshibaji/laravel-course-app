@@ -14,7 +14,7 @@ export default function Courses({ courses }: any) {
 
       <section className="py-5">
         <div className="container">
-          <h2 className="text-center mb-4">My Courses</h2>
+          <h2 className="text-center mb-4">My All Courses</h2>
           <hr className="my-4" />
           <div className="row g-4">
             {
@@ -38,16 +38,10 @@ export default function Courses({ courses }: any) {
                   rating={course.rating}
                   course={course}
                   // handleEnroll={route('checkout', { course: course.id })}
-                  learnMore={route('user.course', { id: course.id })}
+                  learnMoreLink={ course.status === "published" ? route('user.course', { id: course.id }): '#'}
+                  learnMoreText={ course.status === "published" ? "Learn More" : 'Coming Soon'}
                 />))
             }
-            {/* <CourseCard />
-            <CourseCard />
-            <CourseCard />
-            <CourseCard />
-            <CourseCard />
-            <CourseCard />
-            <CourseCard /> */}
           </div>
         </div>
       </section>

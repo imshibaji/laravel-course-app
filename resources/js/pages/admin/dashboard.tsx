@@ -34,7 +34,7 @@ export default function Dashboard({ courses }: any) {
                                 enrollBtnText={course.status === "published" ? "Enroll Now" : "Coming Soon"}
                                 // handleEnroll={course.status === "published" ? route('checkout', { course: course.id }) : null}
                                 lastUpdated={course.updated_at}
-                                learnMore={route('admin.course', { id: course.id })}
+                                learnMoreLink={route('admin.course', { id: course.id })}
                                 />
                         ))}
                         {/* <MainCourseCard learnMore="/user/course?id=1&chapter=1" />

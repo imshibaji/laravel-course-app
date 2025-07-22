@@ -11,7 +11,7 @@ export const formatter = new Intl.DateTimeFormat('en-US', {
 //   timeZoneName: 'short',
 });
 
-export default function CourseCard({ title, desc, duration, level, instructor, rating, actualPrice, price, image, enrollments, lastUpdated, enrollBtnText, handleEnroll, learnMore }: any) {
+export default function CourseCard({ title, desc, duration, level, instructor, rating, actualPrice, price, image, enrollments, lastUpdated, enrollBtnText, handleEnroll, learnMoreLink, learnMoreText }: any) {
     // Default values for the course card
     return (
         <div className="col-md-4">
@@ -73,10 +73,10 @@ export default function CourseCard({ title, desc, duration, level, instructor, r
                     }
                     {/* Know More button */}
                     {
-                        learnMore && (
+                        learnMoreLink && (
                             <div className="d-flex flex-column mt-3">
-                                <Link href={learnMore} className="btn btn-outline-secondary w-full">
-                                    Learn More
+                                <Link href={learnMoreLink} className="btn btn-outline-secondary w-full">
+                                    {learnMoreText || "Learn More"}
                                 </Link>
                             </div>
                         )
