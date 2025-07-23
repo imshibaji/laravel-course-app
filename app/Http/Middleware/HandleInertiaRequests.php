@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Setting;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -39,12 +40,27 @@ class HandleInertiaRequests extends Middleware
     {
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
+        $settings = Setting::all();
+        foreach ($settings as $setting) {
+            if($setting->active === 1){
+                config()->set('settings.'.$setting->key, $setting->value);
+            }
+        }
+
         return [
             ...parent::share($request),
-            'name' => config('app.name'),
+            'appName' => config('app.name'),
+            'settings' => config('settings'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
                 'user' => $request->user(),
+            ],
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+                'warning' => $request->session()->get('warning'),
+                'info' => $request->session()->get('info'),
+                'message' => $request->session()->get('message'),
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),

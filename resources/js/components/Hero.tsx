@@ -1,7 +1,14 @@
 import { Link } from "@inertiajs/react";
 
+export interface HeroProps {
+    title?: string;
+    subtitle?: string;
+    image?: string;
+    buttonLink?: string;
+    buttonText?: string;
+}
 
-export default function Hero({ title, subtitle, image, link, buttonText }: any) {
+export default function Hero({ title, subtitle, image, buttonLink, buttonText }: HeroProps) {
     const heroImage = image || 'https://shibajidebnath.com/wp-content/uploads/2024/04/Web-design.webp';
     
     return (
@@ -19,8 +26,8 @@ export default function Hero({ title, subtitle, image, link, buttonText }: any) 
                         <p className="lead">
                             {subtitle || "Unlock the Power of Learning with Shibaji Sir's Courses"}
                         </p>
-                        {link && buttonText &&
-                            <Link href={link} className="btn btn-success btn-lg">
+                        {buttonLink && buttonText &&
+                            <Link href={buttonLink} className="btn btn-success btn-lg">
                                 {buttonText}
                             </Link>
                         }

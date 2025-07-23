@@ -14,7 +14,7 @@ class ChapterController extends Controller
     public function index(Request $request)
     {
         $courseId = $request->input('courseId');
-        $chapters = Chapter::where('course_id', $courseId)->get();
+        $chapters = $courseId ? Chapter::where('course_id', $courseId)->get(): Chapter::all();
         return inertia('admin/chapters/index', ['chapters'=>$chapters]);
     }
 
@@ -45,7 +45,7 @@ class ChapterController extends Controller
 
         $chapter->order = $request->input('order') ?? 0;
         $chapter->save();
-        return to_route('admin.courses.show', $chapter->course_id);
+        return to_route('admin.courses.show', $chapter->course_id)->with('success', 'Chapter created successfully');
     }
 
     /**
@@ -85,7 +85,7 @@ class ChapterController extends Controller
 
         $chapter->order = $request->input('order') ?? 0;
         $chapter->save();
-        return to_route('admin.courses.show', $chapter->course_id);
+        return to_route('admin.courses.show', $chapter->course_id)->with('success', 'Chapter updated successfully');
     }
 
     /**
@@ -112,12 +112,12 @@ class ChapterController extends Controller
     public function restore($id){
         $chapter = Chapter::onlyTrashed()->find($id);
         $chapter->restore();
-        return to_route('admin.chapters.trashed');
+        return to_route('admin.chapters.trashed')->with('success', 'Chapter restored successfully');
     }
 
     public function forceDelete($id){
         $chapter = Chapter::onlyTrashed()->find($id);
         $chapter->forceDelete();
-        return to_route('admin.chapters.trashed');
+        return to_route('admin.chapters.trashed')->with('success', 'Chapter deleted successfully');
     }
 }

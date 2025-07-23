@@ -1,4 +1,6 @@
+import DeleteBtn from "@/components/DeleteBtn";
 import AdminLayout from "@/layouts/AdminLayout";
+import { Link } from "@inertiajs/react";
 
 export default function Settings({settings}: any) {
     return (
@@ -8,7 +10,7 @@ export default function Settings({settings}: any) {
                     <div className="card-header">
                         <div className="d-flex justify-content-between align-items-center">
                             <h5 className="card-title">All Settings</h5>
-                            <button className="btn btn-primary">Add New</button>
+                            <Link href={route('admin.settings.create')} className="btn btn-primary">Add New Setting</Link>
                         </div>
                     </div>
                     <div className="card-body">
@@ -35,29 +37,17 @@ export default function Settings({settings}: any) {
                                                     <td>{setting.value}</td>
                                                     <td>{setting.type}</td>
                                                     <td>{setting.description}</td>
-                                                    <td>{setting.active ? 'Active' : 'Inactive'}</td>
+                                                    <td>{setting.active === 1 ? 'Active' : 'Inactive'}</td>
                                                     <td className="text-center">
-                                                        <button className="btn btn-primary me-2">Edit</button>
-                                                        <button className="btn btn-danger">Delete</button>
+                                                        <div className="btn-group" role="group">
+                                                            <Link href={route('admin.settings.edit', setting.id)} className="btn btn-warning">Edit</Link>
+                                                            <DeleteBtn id={setting.id} title={setting.key} href={route('admin.settings.destroy', setting.id)} className="btn btn-danger">Delete</DeleteBtn>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             )
                                         })
                                     }
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>website_title</td>
-                                        <td>Course App</td>
-                                        <td>String</td>
-                                        <td>Website Title</td>
-                                        <td>Active</td>
-                                        <td className="text-center">
-                                            <div className="btn-group">
-                                                <button className="btn btn-primary">Edit</button>
-                                                <button className="btn btn-danger">Delete</button>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>

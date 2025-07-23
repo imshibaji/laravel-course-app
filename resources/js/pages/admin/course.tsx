@@ -67,7 +67,7 @@ export default function Course({ chapters }: { chapters: ChapterProps[] }) {
         console.log("Mark as completed clicked");
     }
     return (
-        <AdminLayout>
+        <AdminLayout title="Course">
             <div className="container">
                 <div className="row">
                     <div className="col-md-3 py-3 order-2 order-md-1">

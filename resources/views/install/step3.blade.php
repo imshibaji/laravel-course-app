@@ -10,7 +10,7 @@
     <input class="form-control" name="MAIL_USERNAME" placeholder="Username"><br>
     <input class="form-control" name="MAIL_PASSWORD" placeholder="Password"><br>
     <input class="form-control" name="MAIL_FROM_ADDRESS" placeholder="From Email" value="hello@example.com"><br>
-    <input class="form-control" name="MAIL_FROM_NAME" placeholder="From Name" value="Laravel"><br>
+    <input class="form-control" name="MAIL_FROM_NAME" placeholder="From Name" value="Course App"><br>
     <button class="btn btn-success" type="submit">Finish Installation</button>
 </form>
 @endsection

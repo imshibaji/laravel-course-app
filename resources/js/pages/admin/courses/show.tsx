@@ -4,6 +4,7 @@ import { Link } from "@inertiajs/react";
 import VideoPlayer from "@/components/VideoPlayer";
 import { useState } from "react";
 import AppMarkdown from "@/components/AppMarkdown";
+import DeleteBtn from "@/components/DeleteBtn";
 
 const menus = [
     { label: "Play", link: "#" },
@@ -104,7 +105,7 @@ export default function CourseShow({ course, chapters }: any) {
                                                             <div className="btn-group" role="group">
                                                                 <button onClick={() => setChapter(chapter)}  className="btn btn-sm btn-info">Play</button>
                                                                 <Link href={route('admin.chapters.edit', chapter.id)} className="btn btn-sm btn-secondary">Edit</Link>
-                                                                <Link href={route('admin.chapters.destroy', chapter.id)} method="delete" className="btn btn-sm btn-danger">Delete</Link>
+                                                                <DeleteBtn id={chapter.id} href={route('admin.chapters.destroy', chapter.id)} title={chapter.title} className="btn btn-sm btn-danger">Delete</DeleteBtn>
                                                             </div>
                                                         </td>
                                                     </tr>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Learning;
 use Illuminate\Http\Request;
 
 class LearningController extends Controller
@@ -12,7 +13,8 @@ class LearningController extends Controller
      */
     public function index()
     {
-        //
+        $learnings = Learning::all();
+        return inertia('admin/learning/index', ['learnings' => $learnings]);
     }
 
     /**

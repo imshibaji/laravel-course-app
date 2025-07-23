@@ -1,6 +1,7 @@
 import AdminLayout from "@/layouts/AdminLayout";
 import Card from "../components/Card";
 import { Link } from "@inertiajs/react";
+import DeleteBtn from "@/components/DeleteBtn";
 
 export default function CourseList({ courses }: any) {
     return (
@@ -9,7 +10,7 @@ export default function CourseList({ courses }: any) {
                 <Card title="Courses" actions={
                     <>
                         <Link href={route('admin.courses.create')} className="btn btn-primary me-2">Add New Course</Link>
-                        <Link href={route('admin.courses.trashed')} className="btn btn-warning">Trashed Courses</Link>
+                        {/* <Link href={route('admin.courses.trashed')} className="btn btn-warning">Trashed Courses</Link> */}
                     </>
                 }>
                     <div className="table-responsive">
@@ -41,7 +42,7 @@ export default function CourseList({ courses }: any) {
                                                 <div className="btn-group" role="group">
                                                     <Link href={route('admin.courses.show', course.id)} className="btn btn-info">View</Link>
                                                     <Link href={route('admin.courses.edit', course.id)} className="btn btn-secondary">Edit</Link>
-                                                    <Link href={route('admin.courses.destroy', course.id)} method="delete" className="btn btn-danger">Delete</Link>
+                                                    <DeleteBtn id={course.id} title={course.title} href={route('admin.courses.destroy', course.id)} className="btn btn-danger">Delete</DeleteBtn>
                                                 </div>
                                             </td>
                                         </tr>

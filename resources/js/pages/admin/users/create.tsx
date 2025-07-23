@@ -2,22 +2,22 @@ import AdminLayout from "@/layouts/AdminLayout";
 import { useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 
-export default function UserEdit({ user }: any) {
-    const { data, setData, put, processing, errors, reset, recentlySuccessful } = useForm({
-        firstname: user.firstname,
-        lastname: user.lastname,
-        mobile: user.mobile,
-        email: user.email,
-        role: user.role,
-        is_active: user.is_active,
-        password: user.password,
+export default function UserCreate() {
+    const { data, setData, post, processing, errors, reset, recentlySuccessful } = useForm({
+        firstname: '',
+        lastname: '',
+        mobile: '',
+        email: '',
+        role: 'user',
+        is_active: true,
+        password: '',
         password_confirmation: '',
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        put(route('admin.users.update', user.id), {
+        post(route('admin.users.store'), {
             preserveScroll: true,
             onSuccess: () => reset('password', 'password_confirmation'),
             onError: (errors) => {

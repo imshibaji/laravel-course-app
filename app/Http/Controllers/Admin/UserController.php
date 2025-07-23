@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
@@ -22,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('admin/users/create');
     }
 
     /**
@@ -30,7 +32,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'nullable|string|max:255',
+            'mobile' => 'required|string|max:15|unique:users,mobile',
+            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        User::create([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'is_active' => $request->is_active
+        ]);
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -38,7 +57,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        return inertia('admin/users/show', ['user' => $user]);
     }
 
     /**
@@ -55,9 +75,25 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'nullable|string|max:255',
+            'mobile' => 'required|string|max:15',
+            'email' => 'required|string|lowercase|email|max:255',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
         $user = User::find($id);
-        $user->update($request->all());
-        return redirect()->route('admin.users.index');
+        $user->update([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'role' => $request->role,
+            'is_active' => $request->is_active,
+            'password' => $request->password ? Hash::make($request->password) : $user->password
+        ]);
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
     }
 
     /**
@@ -65,6 +101,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('admin.users.index');
     }
 }

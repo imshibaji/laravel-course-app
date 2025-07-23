@@ -1,11 +1,23 @@
+import { usePage } from "@inertiajs/react";
 import MainCourseCard from "../../components/CourseCard";
 import Hero from "../../components/Hero"; // Adjust the path as necessary
 import UserLayout from "@/layouts/UserLayout";
 
 
 export default function Dashboard({ courses }: any) {
+    const {settings} = usePage().props as any;
+    
     return (
         <UserLayout>
+            <section>
+                <Hero
+                    title={settings.user_dashboard_title || "Explore Our Courses"}
+                    subtitle={settings.user_dashboard_subtitle || "Find the right course to enhance your skills and knowledge."}
+                    image={settings.user_dashboard_image ? "/images/banners/" + settings.user_dashboard_image : "/images/banner.jpg"}
+                    buttonText={settings.user_dashboard_button_text || "Explore Courses"}
+                    buttonLink={settings.user_dashboard_button_link || route('user.courses')}
+                />
+            </section>
             <div className="container py-5">
                 <section className="pb-5">
                     <h2 className="text-center my-4">Currently Available Courses</h2>

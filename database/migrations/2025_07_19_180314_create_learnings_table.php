@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('learnings', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id')->nullable();
+            $table->string('course_id')->nullable();
+            $table->string('chapter_id')->nullable();
+            $table->string('status')->nullable();
+            $table->dateTime('completed_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

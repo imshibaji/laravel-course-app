@@ -70,7 +70,7 @@ class CourseController extends Controller
         $course->status = $request->input('status');
         $course = $this->uploadImage($request, $course);
         $course->save();
-        return to_route('admin.courses.show', $course->id);
+        return to_route('admin.courses.show', $course->id)->with('success', 'Course created successfully');
     }
 
     /**
@@ -121,7 +121,7 @@ class CourseController extends Controller
         $course = $this->uploadImage($request, $course);
         $course->save();
 
-        return to_route('admin.courses.show', $id);
+        return to_route('admin.courses.show', $id)->with('success', 'Course updated successfully');
     }
 
     /**
@@ -139,7 +139,7 @@ class CourseController extends Controller
         }
         // Delete course
         $course->delete();
-        return to_route('admin.courses.index');
+        return to_route('admin.courses.index')->with('success', 'Course deleted successfully');
     }
 
     public function search(Request $request){
@@ -156,7 +156,7 @@ class CourseController extends Controller
     public function restore($id){
         $course = Course::onlyTrashed()->find($id);
         $course->restore();
-        return to_route('admin.courses.trashed');
+        return to_route('admin.courses.trashed')->with('success', 'Course restored successfully');
     }
 
     public function forceDelete($id){
@@ -174,6 +174,6 @@ class CourseController extends Controller
         }
         // Delete course
         $course->forceDelete();
-        return to_route('admin.courses.trashed');
+        return to_route('admin.courses.trashed')->with('success', 'Course deleted successfully');
     }
 }

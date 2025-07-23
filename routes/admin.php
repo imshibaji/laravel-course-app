@@ -30,6 +30,10 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::delete('chapters/delete/{id}', [ChapterController::class, 'forceDelete'])->name('admin.chapters.forceDelete');
         Route::resource('chapters', ChapterController::class)->names('admin.chapters');
 
+        Route::get('settings/search', [SettingController::class, 'search'])->name('admin.settings.search');
+        Route::get('settings/trashed', [SettingController::class, 'trashed'])->name('admin.settings.trashed');
+        Route::get('settings/restore/{id}', [SettingController::class, 'restore'])->name('admin.settings.restore');
+        Route::delete('settings/delete/{id}', [SettingController::class, 'forceDelete'])->name('admin.settings.forceDelete');
         Route::resource('settings', SettingController::class)->names('admin.settings');
         Route::resource('users', UserController::class)->names('admin.users');
     });
