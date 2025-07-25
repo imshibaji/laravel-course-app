@@ -10,7 +10,7 @@ export default function Settings({settings}: any) {
                     <div className="card-header">
                         <div className="d-flex justify-content-between align-items-center">
                             <h5 className="card-title">All Settings</h5>
-                            <Link href={route('admin.settings.create')} className="btn btn-primary">Add New Setting</Link>
+                            {/* <Link href={route('admin.settings.create')} className="btn btn-primary">Add New Setting</Link> */}
                         </div>
                     </div>
                     <div className="card-body">
@@ -34,14 +34,14 @@ export default function Settings({settings}: any) {
                                                 <tr key={index}>
                                                     <th scope="row">{setting.id}</th>
                                                     <td>{setting.key}</td>
-                                                    <td>{setting.value}</td>
+                                                    <td>{setting.value.length > 50 ? setting.value.substring(0, 50) + '...' : setting.value.substring(0, 50)}</td>
                                                     <td>{setting.type}</td>
                                                     <td>{setting.description}</td>
                                                     <td>{setting.active === 1 ? 'Active' : 'Inactive'}</td>
                                                     <td className="text-center">
                                                         <div className="btn-group" role="group">
                                                             <Link href={route('admin.settings.edit', setting.id)} className="btn btn-warning">Edit</Link>
-                                                            <DeleteBtn id={setting.id} title={setting.key} href={route('admin.settings.destroy', setting.id)} className="btn btn-danger">Delete</DeleteBtn>
+                                                            {/* <DeleteBtn id={setting.id} title={setting.key} href={route('admin.settings.destroy', setting.id)} className="btn btn-danger">Delete</DeleteBtn> */}
                                                         </div>
                                                     </td>
                                                 </tr>

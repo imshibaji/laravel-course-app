@@ -20,7 +20,13 @@ export default function AdminNav() {
                             <Link className="nav-link active" aria-current="page" href={route('admin.courses.index')}>Courses</Link>
                         </li>
                         <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" href={route('admin.orders.index')}>All Orders</Link>
+                        </li>
+                        <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" href={route('admin.users.index')}>All Users</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" href={route('admin.learnings.index')}>All Learnings</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" href={route('admin.settings.index')}>Website Settings</Link>

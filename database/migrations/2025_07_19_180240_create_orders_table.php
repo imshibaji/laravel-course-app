@@ -16,11 +16,23 @@ return new class extends Migration
             $table->string('user_id')->nullable();
             $table->string('course_id')->nullable();
 
+            $table->string('txnid')->nullable();
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('zipcode')->nullable();
+
+            $table->string('productinfo')->nullable();
+            $table->string('amount')->nullable();
+
             $table->string('payment_method')->nullable();
             $table->string('payment_status')->nullable();
-            $table->double('amount')->nullable();
             
-            $table->string('transaction_id')->nullable();
             $table->string('payment_gateway')->nullable();
             $table->timestamps();
             $table->softDeletes();

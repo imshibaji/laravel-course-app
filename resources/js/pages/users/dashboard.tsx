@@ -13,7 +13,7 @@ export default function Dashboard({ courses }: any) {
                 <Hero
                     title={settings.user_dashboard_title || "Explore Our Courses"}
                     subtitle={settings.user_dashboard_subtitle || "Find the right course to enhance your skills and knowledge."}
-                    image={settings.user_dashboard_image ? "/images/banners/" + settings.user_dashboard_image : "/images/banner.jpg"}
+                    image={settings.user_dashboard_image ? settings.user_dashboard_image : "/images/banner.jpg"}
                     buttonText={settings.user_dashboard_button_text || "Explore Courses"}
                     buttonLink={settings.user_dashboard_button_link || route('user.courses')}
                 />

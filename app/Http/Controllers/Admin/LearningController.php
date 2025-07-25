@@ -14,7 +14,7 @@ class LearningController extends Controller
     public function index()
     {
         $learnings = Learning::all();
-        return inertia('admin/learning/index', ['learnings' => $learnings]);
+        return inertia('admin/learnings/index', ['learnings' => $learnings]);
     }
 
     /**

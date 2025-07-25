@@ -27,7 +27,7 @@ export default function SettingEdit({ setting }: any) {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="value" className="form-label">Value</label>
-                                <input value={data.value} onChange={(e) => setData('value', e.target.value)} type="text" className="form-control" id="value" />
+                                <textarea value={data.value} onChange={(e) => setData('value', e.target.value)} className="form-control" id="value" rows={10} />
                             </div>
                             <div className="row mb-3">
                                 <div className="col">

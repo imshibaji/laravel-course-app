@@ -3,6 +3,8 @@ import { useForm } from "@inertiajs/react";
 
 export default function Checkout({user, course}: any) {
     const {data, setData, submit, processing, errors, reset} = useForm({
+        course: course.id,
+        user: user.id,
         firstname: user && user.firstname || '',
         lastname: user && user.lastname || '',
         email: user && user.email || '',
