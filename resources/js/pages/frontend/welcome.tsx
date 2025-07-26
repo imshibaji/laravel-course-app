@@ -2,12 +2,14 @@ import CourseCard from "@/components/CourseCard";
 import Hero from "@/components/Hero";
 import Review from "@/components/Review";
 import FrontLayout from "@/layouts/FrontLayout";
+import { usePage } from "@inertiajs/react";
 
 export default function Home({ courses }: any) {
+    const { settings } = usePage().props as any;
     return (
         <FrontLayout>
             <section>
-                <Hero image="/images/banner.jpg" link="/courses" buttonText="Explore Courses" />
+                <Hero image={settings.home_image} title={settings.home_title} subtitle={settings.home_subtitle} buttonLink={settings.home_button_link} buttonText={settings.home_button_text} />
             </section>
 
             <section className="py-5">

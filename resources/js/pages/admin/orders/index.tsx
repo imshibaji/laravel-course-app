@@ -28,9 +28,10 @@ export default function OrdersList({ orders }: any) {
                             </thead>
                             <tbody>
                                 {
+                                    orders && orders.length > 0 ?
                                     orders.map((order: any, index: number) => {
                                         return (
-                                            <tr key={index}>
+                                            <tr className="text-center" key={index}>
                                                 <td>{order.txnid}</td>
                                                 <td>{order.firstname} {order.lastname}</td>
                                                 <td>{order.email}</td>
@@ -40,14 +41,18 @@ export default function OrdersList({ orders }: any) {
                                                 <td>{order.payment_status}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group" role="group">
-                                                        <Link href={route('admin.orders.show', order.id)} className="btn btn-sm btn-info">View</Link>
-                                                        <Link href={route('admin.orders.update', order.id)} className="btn btn-sm btn-warning">Update</Link>
+                                                        {/* <Link href={route('admin.orders.show', order.id)} className="btn btn-sm btn-info">View</Link> */}
+                                                        <Link href={route('admin.orders.edit', order.id)} className="btn btn-sm btn-warning">Edit</Link>
                                                         <DeleteBtn id={order.id} href={route('admin.orders.destroy', order.id)} title={order.productinfo} className="btn btn-sm btn-danger">Delete</DeleteBtn>
                                                     </div>
                                                 </td>
                                             </tr>
                                         );
-                                    })
+                                    }): (
+                                        <tr className="text-center">
+                                            <td className="text-center my-5 py-5" colSpan={8}>No orders found</td>
+                                        </tr>
+                                    )
                                 }
                             </tbody>
                         </table>

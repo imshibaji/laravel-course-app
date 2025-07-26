@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $orders = Order::all();
-        return inertia('admin/orders/index', ['orders' => $orders]);
+        $reviews = Review::all();
+        return inertia('admin/reviews/index', ['reviews' => $reviews]);
     }
 
     /**
@@ -22,7 +22,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return inertia('admin/orders/create');
+        //
     }
 
     /**
@@ -30,15 +30,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = new Order();
-        $order->user_id = $request->input('user_id');
-        $order->course_id = $request->input('course_id');
-
-        
-        $order->amount = $request->input('amount');
-        $order->status = $request->input('status');
-        $order->save();
-        return redirect()->route('admin.orders.index')->with('success', 'Order created successfully');
+        //
     }
 
     /**
@@ -46,7 +38,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        return inertia('admin/orders/show', ['order' => Order::find($id)]);
+        //
     }
 
     /**
@@ -54,7 +46,7 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        return inertia('admin/orders/edit', ['order' => Order::find($id)]);
+        //
     }
 
     /**

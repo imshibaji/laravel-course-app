@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ChapterController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LearningController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AdminController;
@@ -40,6 +41,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
         Route::resource('orders', OrderController::class)->names('admin.orders');
         Route::resource('learnings', LearningController::class)->names('admin.learnings');
+        Route::resource('reviews', ReviewController::class)->names('admin.reviews');
         Route::resource('users', UserController::class)->names('admin.users');
     });
 });

@@ -55,11 +55,11 @@ export default function PayuForm({paymentdata}: any) {
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="product">Product</label>
-                                    <input type="text" className="form-control" id="product" name="product" value={data.product} onChange={(e) => setData('product', e.target.value)} />
+                                    <input readOnly type="text" className="form-control" id="product" name="product" value={data.product} onChange={(e) => setData('product', e.target.value)} />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="amount">Amount</label>
-                                    <input type="text" className="form-control" id="amount" name="amount" value={data.amount} onChange={(e) => setData('amount', e.target.value)} />
+                                    <input readOnly type="text" className="form-control" id="amount" name="amount" value={data.amount} onChange={(e) => setData('amount', e.target.value)} />
                                 </div>
                                 <hr className="my-4" />
                                 <div className="d-grid">

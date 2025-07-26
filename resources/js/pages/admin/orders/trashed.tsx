@@ -30,7 +30,7 @@ export default function OrdersList({ orders }: any) {
                                 {
                                     orders.map((order: any, index: number) => {
                                         return (
-                                            <tr key={index}>
+                                            <tr className="text-center" key={index}>
                                                 <td>{order.txnid}</td>
                                                 <td>{order.firstname} {order.lastname}</td>
                                                 <td>{order.email}</td>

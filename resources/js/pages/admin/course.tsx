@@ -32,7 +32,20 @@ export interface ChapterProps {
 }
 
 export default function Course({ chapters }: { chapters: ChapterProps[] }) {
-    const [chapter, setChapter] = useState<ChapterProps>({});
+    const [chapter, setChapter] = useState<ChapterProps>({
+        title: "No chapter selected",
+        details: "No chapter details available",
+        embed_code: "",
+        video_url: "",
+        duration: "",
+        instructor: "",
+        order: "",
+        course_id: 0,
+        status: "",
+        created_at: "",
+        updated_at: "",
+        id: 0,
+    } as ChapterProps);
     const menus = chapters.map((chap: any) => {
         return {
             label: chap.title,

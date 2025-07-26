@@ -2,12 +2,12 @@ import { SharedData } from "@/types";
 import { Link, usePage } from "@inertiajs/react";
 
 export default function AdminNav() {
-    const { auth } = usePage<SharedData>().props;
+    const { auth, settings } = usePage<SharedData>().props;
     const name = `${auth.user?.firstname}` || "Guest";
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-brand">
             <div className="container">
-                <Link className="navbar-brand" href="/admin">Shibaji Sir's Admin</Link>
+                <Link className="navbar-brand" href="/admin">{settings?.website_title || "Shibaji Sir's Courses"} Admin</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -20,13 +20,16 @@ export default function AdminNav() {
                             <Link className="nav-link active" aria-current="page" href={route('admin.courses.index')}>Courses</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href={route('admin.orders.index')}>All Orders</Link>
+                            <Link className="nav-link active" aria-current="page" href={route('admin.orders.index')}>Orders</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href={route('admin.users.index')}>All Users</Link>
+                            <Link className="nav-link active" aria-current="page" href={route('admin.users.index')}>Users</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href={route('admin.learnings.index')}>All Learnings</Link>
+                            <Link className="nav-link active" aria-current="page" href={route('admin.learnings.index')}>Learnings</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" href={route('admin.reviews.index')}>Reviews</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" href={route('admin.settings.index')}>Website Settings</Link>

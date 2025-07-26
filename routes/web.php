@@ -20,7 +20,16 @@ Route::post('/install/complete', [InstallController::class, 'complete'])->name('
 
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
-Route::get('/courses', [FrontController::class, 'courses'])->name('home');
+Route::get('/courses', [FrontController::class, 'courses'])->name('courses');
+Route::get('/course/{id}', [FrontController::class, 'course'])->name('course');
+Route::get('/search', [FrontController::class, 'search'])->name('search');
+Route::get('/about-us', [FrontController::class, 'aboutUs'])->name('about-us');
+Route::get('/contact-us', [FrontController::class, 'contactUs'])->name('contact-us');
+Route::get('/terms-and-conditions', [FrontController::class, 'termAndCondition'])->name('term-and-condition');
+Route::get('/privacy-policy', [FrontController::class, 'privacyPolicy'])->name('privacy-policy');
+
+
+// Checkout
 Route::get('/checkout', [FrontController::class, 'checkout'])->name('checkout');
 Route::post('/payNow', [FrontController::class, 'payNow'])->name('payNow');
 

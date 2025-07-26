@@ -2,12 +2,12 @@ import { SharedData } from "@/types";
 import { Link, usePage } from "@inertiajs/react";
 
 export default function UserNav() {
-    const { auth, location: url } = usePage<SharedData>().props;
+    const { auth, settings, location: url } = usePage<SharedData>().props;
     const name = `${auth.user?.firstname}` || "Guest";
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-brand">
             <div className="container">
-                <Link className="navbar-brand" href="/user">Shibaji Sir's Courses</Link>
+                <Link className="navbar-brand" href="/user">{settings?.website_title || "Shibaji Sir's Courses"}</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

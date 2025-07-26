@@ -1,6 +1,6 @@
 import FrontLayout from "@/layouts/FrontLayout";
-import CourseCard from "../components/CourseCard";
-import Hero from "../components/Hero";
+import CourseCard from "@/components/CourseCard";
+import Hero from "@/components/Hero";
 
 export default function Courses({ courses }: any) {
   return (

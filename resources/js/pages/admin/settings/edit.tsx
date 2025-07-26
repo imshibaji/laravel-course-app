@@ -23,7 +23,7 @@ export default function SettingEdit({ setting }: any) {
                         <form onSubmit={submitHandler}>
                             <div className="mb-3">
                                 <label htmlFor="key" className="form-label">Key</label>
-                                <input value={data.key} onChange={(e) => setData('key', e.target.value)} type="text" className="form-control" id="key" />
+                                <input readOnly value={data.key} onChange={(e) => setData('key', e.target.value)} type="text" className="form-control" id="key" />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="value" className="form-label">Value</label>
@@ -43,13 +43,10 @@ export default function SettingEdit({ setting }: any) {
                                         <option value="string">String</option>
                                         <option value="number">Number</option>
                                         <option value="boolean">Boolean</option>
-                                        <option value="json">JSON</option>
-                                        <option value="array">Array</option>
-                                        <option value="object">Object</option>
-                                        <option value="date">Date</option>
-                                        <option value="time">Time</option>
-                                        <option value="datetime">Datetime</option>
-                                        <option value="enum">Enum</option>
+                                        <option value="markdown">Markdown</option>
+                                        <option value="html">HTML</option>
+                                        <option value="text">Text</option>
+                                        <option value="css">CSS</option>
                                     </select>
                                 </div>
                             </div>

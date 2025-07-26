@@ -8,6 +8,17 @@ use Inertia\Inertia;
 
 class PayuController extends Controller
 {
+    private String $merchant_key;
+    private String $merchant_salt;
+    private String $base_url;
+
+    public function __construct()
+    {
+        $this->merchant_key = setting('payu_merchant_key', env('PAYU_MERCHANT_KEY'));
+        $this->merchant_salt = setting('payu_merchant_salt', env('PAYU_SALT'));
+        $this->base_url = setting('payu_base_url', env('PAYU_BASE_URL'));
+    }
+
     public function showForm(Request $request)
     {
         $data = $request->all();
@@ -17,7 +28,7 @@ class PayuController extends Controller
     public function initiatePayment(Request $request)
     {
         $data = [
-            'key'         => env('PAYU_MERCHANT_KEY'),
+            'key'         => $this->merchant_key,
             'txnid'       => substr(hash('sha256', uniqid() . microtime()), 0, 20),
             'firstname'   => $request->firstname,
             'lastname'    => $request->lastname,       // OK for form data
@@ -51,11 +62,11 @@ class PayuController extends Controller
             '',
             '',
             '',                      // udf6–udf10 blanks
-            env('PAYU_SALT')
+            $this->merchant_salt
         ]);
 
         $data['hash']   = strtolower(hash('sha512', $hashString));
-        $data['action'] = env('PAYU_BASE_URL') . '/_payment';
+        $data['action'] = $this->base_url . '/_payment';
 
         return Inertia::render('payu/submit', ['data' => $data]);
     }
