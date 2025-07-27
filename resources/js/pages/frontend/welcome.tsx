@@ -9,7 +9,7 @@ export default function Home({ courses }: any) {
     return (
         <FrontLayout>
             <section>
-                <Hero image={settings.home_image} title={settings.home_title} subtitle={settings.home_subtitle} buttonLink={settings.home_button_link} buttonText={settings.home_button_text} />
+                <Hero image={settings?.home_image} title={settings?.home_title} subtitle={settings?.home_subtitle} buttonLink={settings?.home_button_link} buttonText={settings?.home_button_text} />
             </section>
 
             <section className="py-5">

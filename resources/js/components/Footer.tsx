@@ -14,7 +14,7 @@ export default function Footer() {
       </div>
       <hr />
       <div className="container">
-        <p className="mb-0">{settings.website_copyright || "© 2025 Your Website Name"}</p>
+        <p className="mb-0">{settings?.website_copyright || "© 2025 Your Website Name"}</p>
       </div>
     </footer>
   );

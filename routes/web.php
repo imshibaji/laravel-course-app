@@ -1,22 +1,10 @@
 <?php
 
 use App\Http\Controllers\FrontController;
-use App\Http\Controllers\InstallController;
 use App\Http\Controllers\PayuController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-//install route
-Route::get('/install', [InstallController::class, 'step1'])->name('install.step1');
-Route::post('/install/step1', [InstallController::class, 'postStep1'])->name('install.postStep1');
-Route::get('/install/step2', [InstallController::class, 'step2'])->name('install.step2');
-Route::post('/install/step2', [InstallController::class, 'postStep2'])->name('install.postStep2');
-Route::get('/install/step3', [InstallController::class, 'step3'])->name('install.step3');
-Route::post('/install/finish', [InstallController::class, 'finish'])->name('install.finish');
-Route::get('/install/step4', [InstallController::class, 'step4'])->name('install.step4');
-Route::post('/install/complete', [InstallController::class, 'complete'])->name('install.complete');
-
 
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
