@@ -18,6 +18,14 @@ class ChapterController extends Controller
         return inertia('admin/chapters/index', ['chapters'=>$chapters]);
     }
 
+    public function sort(Request $request){
+        foreach ($request->items as $item) {
+            Chapter::where('id', $item['id'])->update(['order' => $item['sort_order']]);
+        }
+        // dd($setting);
+        return redirect()->route('admin.courses.show', $request->courseId);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

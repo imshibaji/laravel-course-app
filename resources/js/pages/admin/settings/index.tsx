@@ -1,8 +1,23 @@
 // import DeleteBtn from "@/components/DeleteBtn";
 import AdminLayout from "@/layouts/AdminLayout";
-import { Link } from "@inertiajs/react";
+import { reorderWithSortOrder } from "@/lib/ReOrder";
+import { Link, useForm } from "@inertiajs/react";
+import { ReactSortable } from "react-sortablejs";
 
 export default function Settings({settings}: any) {
+    const { data, setData, put, } = useForm(settings);
+    
+    const onSubmitted = (item: any) => {
+        const payload = reorderWithSortOrder(data, item.oldIndex, item.newIndex);
+
+        put(route('admin.settings.sort', {items: payload}), {
+            preserveScroll: true,
+            onSuccess: () => {
+                console.log('Sort order saved!');
+            }
+        });
+    };
+    
     return (
         <AdminLayout title="All Settings">
             <div className="container py-3">
@@ -26,12 +41,12 @@ export default function Settings({settings}: any) {
                                         <th scope="col">Status</th>
                                         <th className="text-center" scope="col">Actions</th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                </thead>  
+                                <ReactSortable onEnd={onSubmitted} tag="tbody" list={data} setList={setData}>
                                     {
-                                        settings?.map((setting: any, index: number) => {
+                                        data?.map((setting: any) => {
                                             return (
-                                                <tr key={index}>
+                                                <tr data-id={setting?.id} key={setting?.id}>
                                                     <th scope="row">{setting?.id}</th>
                                                     <td>{setting?.key}</td>
                                                     <td>{setting?.value?.length > 50 ? setting?.value?.substring(0, 50) + '...' : setting?.value?.substring(0, 50)}</td>
@@ -48,7 +63,7 @@ export default function Settings({settings}: any) {
                                             )
                                         })
                                     }
-                                </tbody>
+                                </ReactSortable>
                             </table>
                         </div>
                     </div>

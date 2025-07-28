@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chapter;
 use App\Models\Course;
 use Illuminate\Http\Request;
 
@@ -9,19 +10,20 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::orderBy('order', 'asc')->get();
         return inertia('frontend/welcome', ['courses' => $courses]);
     }
     public function courses()
     {
-        $courses = Course::all();
+        $courses = Course::orderBy('order', 'asc')->get();
         return inertia('frontend/courses', ['courses' => $courses]);
     }
     public function course($id)
     {
         $course = Course::find($id);
-        $chapters = $course->chapters;
+        $chapters = Chapter::where('course_id', $id)->orderBy('order', 'asc')->get();
         return inertia('frontend/course', [
+            'course' => $course,
             'chapters' => $chapters,
         ]);
     }

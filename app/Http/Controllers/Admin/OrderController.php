@@ -17,6 +17,14 @@ class OrderController extends Controller
         return inertia('admin/orders/index', ['orders' => $orders]);
     }
 
+    public function sort(Request $request){
+        foreach ($request->items as $item) {
+            Order::where('id', $item['id'])->update(['order' => $item['sort_order']]);
+        }
+        // dd($setting);
+        return redirect()->route('admin.settings.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

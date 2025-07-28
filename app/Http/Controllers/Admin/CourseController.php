@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chapter;
 use App\Models\Course;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,16 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::orderBy('order', 'asc')->get();
         return inertia('admin/courses/index', ['courses' => $courses]);
+    }
+
+    public function sort(Request $request){
+        foreach ($request->items as $item) {
+            Course::where('id', $item['id'])->update(['order' => $item['sort_order']]);
+        }
+        // dd($setting);
+        return redirect()->route('admin.courses.index');
     }
 
     /**
@@ -79,7 +88,7 @@ class CourseController extends Controller
     public function show(string $id)
     {
         $course = Course::find($id);
-        $chapters = $course->chapters;
+        $chapters = Chapter::where('course_id', $id)->orderBy('order', 'asc')->get();
         // dd($course, $chapters);
         return inertia('admin/courses/show', [
             'course' => $course,

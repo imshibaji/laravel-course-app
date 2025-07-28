@@ -17,6 +17,14 @@ class LearningController extends Controller
         return inertia('admin/learnings/index', ['learnings' => $learnings]);
     }
 
+    public function sort(Request $request){
+        foreach ($request->items as $item) {
+            Learning::where('id', $item['id'])->update(['order' => $item['sort_order']]);
+        }
+        // dd($setting);
+        return redirect()->route('admin.settings.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

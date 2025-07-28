@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('video_url')->nullable();
             $table->string('duration')->nullable();
             $table->string('instructor')->nullable();
-            $table->integer('order')->nullable();
             $table->integer('course_id')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

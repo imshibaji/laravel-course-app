@@ -21,7 +21,7 @@ export default function Dashboard({ courses }: any) {
                                 certificate={course.certificate}
                                 duration={course.duration}
                                 instructor={course.instructor}
-                                actualPrice={course.offer_price > 0 ? course.price : 0 }
+                                actualPrice={course.offer_price > 0 ? course.price : '' }
                                 price={course.offer_price > 0 ? course.offer_price : course.price }
                                 category={course.category}
                                 language={course.language}

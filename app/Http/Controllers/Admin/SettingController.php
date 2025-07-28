@@ -13,8 +13,16 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $settings = Setting::all();
+        $settings = Setting::orderBy('order', 'asc')->get();
         return inertia('admin/settings/index', ['settings' => $settings]);
+    }
+
+    public function sort(Request $request){
+        foreach ($request->items as $item) {
+            Setting::where('id', $item['id'])->update(['order' => $item['sort_order']]);
+        }
+        // dd($setting);
+        return redirect()->route('admin.settings.index');
     }
 
     /**

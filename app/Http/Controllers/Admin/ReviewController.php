@@ -17,6 +17,14 @@ class ReviewController extends Controller
         return inertia('admin/reviews/index', ['reviews' => $reviews]);
     }
 
+    public function sort(Request $request){
+        foreach ($request->items as $item) {
+            Review::where('id', $item['id'])->update(['order' => $item['sort_order']]);
+        }
+        // dd($setting);
+        return redirect()->route('admin.settings.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -50,7 +50,7 @@ export default function CourseCard({ title, desc, duration, level, instructor, r
                                 <div className="text-muted d-flex flex-row">
                                     <span className="text-muted me-1">Price:</span>
                                     <div className="d-flex flex-row gap-1">
-                                        {actualPrice &&
+                                        {actualPrice && actualPrice > 0 &&
                                             <span className="col text-danger text-decoration-line-through text-xs"> ₹{actualPrice}/-</span>
                                         }
                                         <span className="col text-success">

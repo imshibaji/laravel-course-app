@@ -4,18 +4,6 @@ import VideoPlayer from "@/components/VideoPlayer";
 import AppMarkdown from "@/components/AppMarkdown";
 import UserLayout from "@/layouts/UserLayout";
 
-// const menus = [
-//     { label: "Overview", link: "#" },
-//     { label: "Carriculum", link: "#" },
-//     { label: "Instructor", link: "#" },
-//     { label: "Reviews", link: "#" },
-//     { label: "Assignments", link: "#" },
-//     { label: "Forum", link: "#" },
-//     { label: "Announcements", link: "#" },
-//     { label: "Syllabus", link: "#" },
-//     { label: "Resources", link: "#" },
-// ];
-
 export interface ChapterProps {
     title?: string;
     details?: string;
@@ -35,7 +23,7 @@ export default function Course({ chapters }: { chapters: ChapterProps[] }) {
     const [chapter, setChapter] = useState<ChapterProps>({});
     const menus = chapters.map((chap: any) => {
         return {
-            label: chap.title,
+            label: chap.title.length > 25 ? chap.title.substring(0, 25) + "..." : chap.title,
             link: () => setChapter(chap),
             icon: "bi bi-play-circle",
         }

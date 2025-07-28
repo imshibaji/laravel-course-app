@@ -27,7 +27,7 @@ export default function Courses({ courses }: any) {
                   certificate={course.certificate ? "/images/certificates/" + course.certificate : "/images/certificate.jpg"}
                   duration={course.duration}
                   instructor={course.instructor}
-                  actualPrice={course.offer_price > 0 ? course.price : 0}
+                  actualPrice={course.offer_price > 0 ? course.price : ''}
                   price={course.offer_price > 0 ? course.offer_price : course.price}
                   category={course.category}
                   language={course.language}

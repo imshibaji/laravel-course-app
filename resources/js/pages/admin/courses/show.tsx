@@ -1,10 +1,12 @@
 import AdminLayout from "@/layouts/AdminLayout";
 import Card from "../components/Card";
-import { Link } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import VideoPlayer from "@/components/VideoPlayer";
 import { useState } from "react";
 import AppMarkdown from "@/components/AppMarkdown";
 import DeleteBtn from "@/components/DeleteBtn";
+import { reorderWithSortOrder } from "@/lib/ReOrder";
+import { ReactSortable } from "react-sortablejs";
 
 const menus = [
     { label: "Play", link: "#" },
@@ -14,6 +16,18 @@ const menus = [
 
 export default function CourseShow({ course, chapters }: any) {
     const [chapter, setChapter] = useState(null);
+    const { data, setData, put } = useForm(chapters);
+    
+    const onSubmitted = (item: any) => {
+        let payload = reorderWithSortOrder(data, item.oldIndex, item.newIndex);
+        put(route('admin.chapters.sort', {items: payload, courseId: course.id}), {
+            preserveScroll: true,
+            onSuccess: () => {
+                console.log('Sort order saved!');
+            }
+        });
+    };
+
     return (
         <AdminLayout>
             <div className="container py-3">
@@ -31,7 +45,7 @@ export default function CourseShow({ course, chapters }: any) {
                                     <h3 className="card-title">{course.title}</h3>
                                 </div>
                                 <div className="card-body">
-                                    {chapter && <VideoPlayer src={chapter ? chapter.video_url : "https://www.youtube.com/watch?v=lPhDaw3Aiig"} />}
+                                    {chapter && <VideoPlayer src={chapter ? chapter?.video_url : "https://www.youtube.com/watch?v=lPhDaw3Aiig"} />}
                                     {!chapter && <div className="ratio ratio-16x9"><img className="img-fluid" src={course.image ? "/images/courses/" + course.image : "/images/image-placeholder.jpg"} alt={course.title} /></div>}
                                 </div>
                                 <div className="card-body">
@@ -95,8 +109,7 @@ export default function CourseShow({ course, chapters }: any) {
                                                     <th className="text-center">Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                {/* Example row, replace with dynamic data */}
+                                            <ReactSortable onEnd={onSubmitted} tag={'tbody'} list={data} setList={setData} >
                                                 {chapters.map((chapter: any) => (
                                                     <tr key={chapter.id}>
                                                         <td>{chapter.title}</td>
@@ -110,11 +123,10 @@ export default function CourseShow({ course, chapters }: any) {
                                                         </td>
                                                     </tr>
                                                 ))}
-                                                {
-                                                    chapters.length === 0 && (<tr><td colSpan={3} className="text-center py-5">No chapters found.</td></tr>)
-                                                }
-                                                {/* Add more rows as needed */}
-                                            </tbody>
+                                            </ReactSortable>
+                                            {
+                                                chapters.length === 0 && (<tr><td colSpan={3} className="text-center py-5">No chapters found.</td></tr>)
+                                            }
                                         </table>
                                     </div>
                                 </div>
