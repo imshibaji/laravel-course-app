@@ -6,11 +6,13 @@ import { reorderWithSortOrder } from "@/lib/ReOrder";
 import { ReactSortable } from "react-sortablejs";
 
 export default function CourseList({ courses }: any) {
-    const { data, setData, put } = useForm(courses);
+    const { data, setData, put, transform } = useForm(courses);
 
     const onSubmitted = (item: any) => {
         const payload = reorderWithSortOrder(data, item.oldIndex, item.newIndex);
-        put(route('admin.courses.sort', {items: payload}), {
+
+        transform((data) => ({ ...data, items: payload }));
+        put(route('admin.courses.sort'), {
             preserveScroll: true,
             onSuccess: () => {
                 console.log('Sort order saved!');

@@ -18,10 +18,7 @@ class SettingController extends Controller
     }
 
     public function sort(Request $request){
-        foreach ($request->items as $item) {
-            Setting::where('id', $item['id'])->update(['order' => $item['sort_order']]);
-        }
-        // dd($setting);
+        setOrder($request->items, 'settings');
         return redirect()->route('admin.settings.index');
     }
 

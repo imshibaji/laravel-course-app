@@ -19,10 +19,7 @@ class CourseController extends Controller
     }
 
     public function sort(Request $request){
-        foreach ($request->items as $item) {
-            Course::where('id', $item['id'])->update(['order' => $item['sort_order']]);
-        }
-        // dd($setting);
+        setOrder($request->items, 'courses');
         return redirect()->route('admin.courses.index');
     }
 

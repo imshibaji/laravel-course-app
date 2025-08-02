@@ -9,3 +9,30 @@ if (!function_exists('setting')) {
         // });
     }
 }
+
+if(!function_exists('setOrder')) {
+    function setOrder($items, $table) {
+        $ids = [];
+        $cases = [];
+
+        foreach ($items as $item) {
+            $id = (int) $item['id'];
+            $order = (int) $item['sort_order'];
+            $ids[] = $id;
+            $cases[] = "WHEN {$id} THEN {$order}";
+        }
+
+        $idsList = implode(',', $ids);
+        $casesSql = implode(' ', $cases);
+
+        $query = "
+            UPDATE {$table}
+            SET `order` = CASE id
+                {$casesSql}
+            END
+            WHERE id IN ({$idsList})
+        ";
+
+        DB::statement($query);
+    }
+}

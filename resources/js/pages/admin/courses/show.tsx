@@ -16,11 +16,12 @@ const menus = [
 
 export default function CourseShow({ course, chapters }: any) {
     const [chapter, setChapter] = useState(null);
-    const { data, setData, put } = useForm(chapters);
+    const { data, setData, put, transform } = useForm(chapters);
     
     const onSubmitted = (item: any) => {
         let payload = reorderWithSortOrder(data, item.oldIndex, item.newIndex);
-        put(route('admin.chapters.sort', {items: payload, courseId: course.id}), {
+        transform((data) => ({ ...data, items: payload }));
+        put(route('admin.chapters.sort', {courseId: course.id}), {
             preserveScroll: true,
             onSuccess: () => {
                 console.log('Sort order saved!');

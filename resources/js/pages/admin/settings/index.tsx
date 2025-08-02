@@ -5,12 +5,12 @@ import { Link, useForm } from "@inertiajs/react";
 import { ReactSortable } from "react-sortablejs";
 
 export default function Settings({settings}: any) {
-    const { data, setData, put, } = useForm(settings);
+    const { data, setData, put, transform} = useForm(settings);
     
     const onSubmitted = (item: any) => {
         const payload = reorderWithSortOrder(data, item.oldIndex, item.newIndex);
-
-        put(route('admin.settings.sort', {items: payload}), {
+        transform((data) => ({ ...data, items: payload }));
+        put(route('admin.settings.sort'), {
             preserveScroll: true,
             onSuccess: () => {
                 console.log('Sort order saved!');

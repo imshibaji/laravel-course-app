@@ -16,7 +16,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         return redirect()->route('admin.dashboard');
     })->name('admin');
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/course', [AdminController::class, 'course'])->name('admin.course');
+    Route::get('/admin/course', [AdminController::class, 'course'])->name('admin.courses');
     Route::get('/admin/course/{id}', [AdminController::class, 'course'])->name('admin.course');
     Route::get('/admin/live', [AdminController::class, 'live'])->name('admin.live');
 

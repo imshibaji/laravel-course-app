@@ -19,10 +19,10 @@ class ChapterController extends Controller
     }
 
     public function sort(Request $request){
-        foreach ($request->items as $item) {
-            Chapter::where('id', $item['id'])->update(['order' => $item['sort_order']]);
-        }
-        // dd($setting);
+        // foreach ($request->items as $item) {
+        //     Chapter::where('id', $item['id'])->update(['order' => $item['sort_order']]);
+        // }
+        setOrder($request->items, 'chapters');
         return redirect()->route('admin.courses.show', $request->courseId);
     }
 
