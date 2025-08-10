@@ -5,12 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Chapter;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class FrontController extends Controller
 {
     public function index()
     {
-        $courses = Course::orderBy('order', 'asc')->get();
+        $courses = Course::orderBy('order', 'asc')->get()->toArray();
+        if(count($courses) < 3){
+            $courses = $courses;
+        }else{
+            $courses = Arr::random($courses, 3);
+        }
         return inertia('frontend/welcome', ['courses' => $courses]);
     }
     public function courses()

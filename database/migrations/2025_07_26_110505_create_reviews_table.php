@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('designation')->nullable();
             $table->string('company')->nullable();
-            $table->string('email')->nullable();
-            $table->string('mobile')->nullable();
             $table->string('avatar')->nullable();
             $table->string('rating')->nullable();
             $table->text('comment')->nullable();

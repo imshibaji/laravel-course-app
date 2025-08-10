@@ -10,7 +10,7 @@ export default function UserEdit({ user }: any) {
         email: user.email,
         role: user.role,
         is_active: user.is_active,
-        password: user.password,
+        password: user.password ?? '',
         password_confirmation: '',
     });
 

@@ -57,7 +57,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::find($id);
+        $user = User::find($id)->load(['orders', 'reviews', 'learnings']);
         return inertia('admin/users/show', ['user' => $user]);
     }
 

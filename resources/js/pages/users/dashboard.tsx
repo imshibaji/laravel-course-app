@@ -30,18 +30,18 @@ export default function Dashboard({ courses }: any) {
                                 desc={course.description.substring(0, 100)}
                                 image={course.image ? "/images/courses/" + course.image : "/images/image-placeholder.jpg"}
                                 certificate={course.certificate ? "/images/certificates/" + course.certificate : "/images/certificate.jpg"}
-                                duration={course.duration}
-                                instructor={course.instructor}
+                                // duration={course.duration}
+                                // instructor={course.instructor}
                                 // actualPrice={course.offer_price > 0 ? course.price : 0 }
                                 // price={course.offer_price > 0 ? course.offer_price : course.price }
-                                category={course.category}
-                                language={course.language}
-                                level={course.level}
-                                status={course.status}
-                                tags={course.tags}
+                                // category={course.category}
+                                // language={course.language}
+                                // level={course.level}
+                                // status={course.status}
+                                // tags={course.tags}
                                 enrollments={course.enrollments}
-                                rating={course.rating}
-                                course={course}
+                                // rating={course.rating}
+                                // course={course}
                                 learnMoreLink={course.status === "published" ? route('user.course', { id: course.id }): '#'}
                                 learnMoreText={course.status === "published" ? "Learn More" : 'Coming Soon'} // Use a ternary operator to conditionally set the text
                             />

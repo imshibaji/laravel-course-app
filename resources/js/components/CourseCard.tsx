@@ -31,18 +31,21 @@ export default function CourseCard({ title, desc, duration, level, instructor, r
                         {desc.length > 90 ? desc.substring(0, 90) + "..." : desc || "Learn the fundamentals of web development, including HTML, CSS, and JavaScript. Build responsive websites and web applications."}
                     </p>
                     <hr className="my-3" />
-                    <div className="d-flex justify-content-between align-items-center">
-                        <span className="text-muted">Duration: {duration || "6 Months"}</span>
-                        <span className="text-muted">Level: {level || "Beginner"}</span>
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center mt-0">
-                        <div className="text-muted">
-                            <span className="text-muted">Instructor: {instructor || "Shibaji Debnath"}</span>
-                        </div>
-                        <div className="text-muted">
-                            <span className="text-muted">Rating: {rating || "4.5/5"}</span>
-                        </div>
-                    </div>
+                    { duration || level ? (
+                        <div className="d-flex justify-content-between align-items-center">
+                        {duration && <span className="text-muted">Duration: {duration}</span>}
+                        {level && <span className="text-muted">Level: {level}</span>}
+                    </div>) : null}
+                    { instructor || rating ? (
+                        <div className="d-flex justify-content-between align-items-center mt-0">
+                            {instructor && <div className="text-muted">
+                                <span className="text-muted">Instructor: {instructor}</span>
+                            </div>}
+                            { rating && <div className="text-muted">
+                                <span className="text-muted">Rating: {rating}</span>
+                            </div>}
+                        </div>) 
+                    : null}
                     {/* Price and Enroll Now button */}
                     {
                         price && (
